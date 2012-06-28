@@ -1,44 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
+
   <head>
-    <meta charset="UTF-8">
-    <title>コード打</title>
-    <!--各種jsファイルの読み込み-->
-    <script language="JavaScript" src="SceneCanvas.js"></script>
-    <script language="JavaScript" src="TitleScene.js"></script>
-    <script language="JavaScript" src="PlayScene.js"></script>
-    <script language="JavaScript" src="ResultScene.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:8080')
+      , room;
+      console.log(socket);
 
-    <script language="JavaScript">
+      socket.on('connect', function(){
+        //クライアント側でkey requestイベント発火
+        socket.emit('key request');
+        //keyを受信
+        socket.on('key push',function(key){
+          console.log("client: 受け取ったkey:"+key);
+          room = io.connect('http://localhost:8080/'+key);
 
-      //htmlが全て読み込まれた後実行される
-      onload = function(){
-        var game = new Game(document.getElementById('mainCanvas'),1000,600);
+          room.on('connect',function(){
+            room.emit('msg send','userhoge');
+            room.on('msg push',function(msg){
+              console.log("client: msgが来ました=>" + msg);
+            });
+          });
+        /*serverとのやりとりはここから書いていく*/ 
+        });
+      });
 
-        //game.~ => gameのメンバ変数になる
-        //TitleScene=>Title.js
-        var titleScene = new TitleScene(game,game.context,"titleScene");
-        //game.gameScenes.push(titleScene);
-        //game.gameScenes['titleScene'] = titleScene;
-        game.addScene(titleScene);
-        game.setScene(titleScene);
 
-        var playScene = new PlayScene(game,game.context,"playScene");
-        //game.gameScenes.push(playScene);
-        //game.gameScenes['playScene'] = playScene;
-        game.addScene(playScene);
-        
-        var resultScene = new ResultScene(game,game.context,"resultScene");
-        game.addScene(resultScene);
-        game.start();
-      }
 
     </script>
+    <meta charset="UTF-8">
+    <title>socket.ioとExpressの組み合わせ </title>
   </head>
   <body>
-    <div align="center">
-      <canvas id='mainCanvas'> </canvas>
-    </div>
+    起動中(｀・ω・´)
+    <h1>socket.ioのサンプルプログラム</h1>
   </body>
 </html>
+
 

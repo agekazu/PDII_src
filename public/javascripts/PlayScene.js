@@ -4,7 +4,7 @@ __charCounter__ = 0;
 __input__ = new String();
 __completedCharacter__ = null;
 
-function PlayScene(game,context,name){
+function PlayScene(game,context,Images,name){
   //この関数はSceneを元にして出来ている(継承)
   this.__proto__ = new Scene(game,context,name);
   this.textList;
@@ -28,7 +28,8 @@ function PlayScene(game,context,name){
 
 //問題文を返すメソッド
 function getQuestion(kind){
-  var text = "include<stdio.h>\n\tint main(void){\n\t\tprintf(\"Hello,World!\");\n\t\treturn 0;\n}"
+//   var text = "include<stdio.h>\n\tint main(void){\n\t\tprintf(\"Hello,World!\");\n\t\treturn 0;\n}"
+  var text = "abc";
 
   switch(kind){
     case "textList":

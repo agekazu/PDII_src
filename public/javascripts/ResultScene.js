@@ -1,31 +1,35 @@
-function ResultScene(game,context,name){
+function ResultScene(game,context,Images,name){
   //この関数はSceneを元にして出来ている(Sceneの継承)
   this.__proto__ = new Scene(game,context,name);
 
   this.init = function(){
-    //startButtonでボタンを描画
-    var buttonwidth = 200;
-    var buttonheight = 75;
+    // buttonWidth
+    var bw = 200;
+    // buttonHeight
+    var bh = 75;
+    var ch = game.canvas.height;
+    var cw = game.canvas.width;
 
     //ボタンの描画
-    var resultButton = new ResultButton(this,"resultButton",1,"toStart.gif",(game.canvas.width/2)-buttonwidth-30,(game.canvas.height)/2 + buttonheight/2,buttonwidth,buttonheight);
+    var toStartButton = new ResultButton(this,"toStartButton",1,Images.toStart,
+        cw/2 - bw/2, ch/2 - bh, bw, bh); 
 
     //タイトルの描画
-    var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表","30pt Arial",1,game.canvas.width/2-100,50,100,20);
+    var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
+        "30pt Arial",1,game.canvas.width/2-100,50,100,20);
 
-    this.addParts(resultButton);
+    this.addParts(toStartButton);
     this.addParts(resultCharacter);
   }
 } 
 
 
-//GUI部品(gif)の描画
-function ResultButton(scene,name,layer,imgName,x,y,width,height){
+//GUI部品(.png)の描画
+function ResultButton(scene,name,layer,imgObj,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
-  var img = new Image();
+  this.imgObj = imgObj;
   this.loop = function(){
-    img.src = "./GUI/" + imgName;
-    this.context.drawImage(img,this.x,this.y);
+    this.context.drawImage(this.imgObj,this.x,this.y);
   }    
   this.onclick = function(e){
     var mouseX = this.game.mouseX;

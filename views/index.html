@@ -1,41 +1,72 @@
 <!DOCTYPE html>
 <html lang="ja">
-
   <head>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://localhost:8080')
-      , room;
-      console.log(socket);
-
-      socket.on('connect', function(){
-        //クライアント側でkey requestイベント発火
-        socket.emit('key request');
-        //keyを受信
-        socket.on('key push',function(key){
-          console.log("client: 受け取ったkey:"+key);
-          room = io.connect('http://localhost:8080/'+key);
-
-          room.on('connect',function(){
-            room.emit('msg send','userhoge');
-            room.on('msg push',function(msg){
-              console.log("client: msgが来ました=>" + msg);
-            });
-          });
-        /*serverとのやりとりはここから書いていく*/ 
-        });
-      });
-
-
-
-    </script>
     <meta charset="UTF-8">
-    <title>socket.ioとExpressの組み合わせ </title>
+    <title>soda</title>
+    <!--各種jsファイルの読み込み-->
+    ../public/javascripts/
+    <script language="JavaScript" src="../public/javascripts/SceneCanvas.js"></script>
+    <script language="JavaScript" src="../public/javascripts/TitleScene.js"></script>
+    <script language="JavaScript" src="../public/javascripts/PlayScene.js"></script>
+    <script language="JavaScript" src="../public/javascripts/ResultScene.js"></script>
+    <script language="JavaScript">
+      
+      // htmlが全て読み込まれた後実行される
+      onload = function(){
+        var Images = {};
+        // 画像読み込み
+        var titleLogoImg = new Image();
+        titleLogoImg.src = "../public/images/codaTitle.png"
+        Images.titleLogo = titleLogoImg;
+        
+        var oppositionImg = new Image();
+        oppositionImg.src = "../public/images/opposition.png"
+        Images.opposition = oppositionImg;
+
+        var rankingImg = new Image();
+        rankingImg.src = "../public/images/ranking.png"
+        Images.ranking = rankingImg;
+        
+        var questionsImg= new Image();
+        questionsImg.src = "../public/images/questions.png"
+        Images.questions = questionsImg;
+
+        var practiceImg = new Image();
+        practiceImg.src = "../public/images/practice.png"
+        Images.practice = practiceImg;
+
+        var toStartImg= new Image();
+        toStartImg.src = "../public/images/toStart.png"
+        Images.toStart = toStartImg;
+
+        init(Images);
+      }
+      
+      function init(Images){
+        var game = new Game(document.getElementById('mainCanvas'),1000,600);
+
+        // game.~ => gameのメンバ変数になる
+        // TitleScene=>Title.js
+        var titleScene = new TitleScene(game,game.context,Images,"titleScene");
+        // game.gameScenes.push(titleScene);
+        // game.gameScenes['titleScene'] = titleScene;
+        game.addScene(titleScene);
+        game.setScene(titleScene);
+
+        var playScene = new PlayScene(game,game.context,Images,"playScene");
+        // game.gameScenes.push(playScene);
+        // game.gameScenes['playScene'] = playScene;
+        game.addScene(playScene);
+
+        var resultScene = new ResultScene(game,game.context,Images,"resultScene");
+        game.addScene(resultScene);
+        game.start();
+      }
+    </script>
   </head>
   <body>
-    起動中(｀・ω・´)
-    <h1>socket.ioのサンプルプログラム</h1>
+    <div align="center">
+      <canvas id='mainCanvas'> </canvas>
+    </div>
   </body>
 </html>
-
-

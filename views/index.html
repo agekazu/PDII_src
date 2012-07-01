@@ -4,69 +4,63 @@
     <meta charset="UTF-8">
     <title>soda</title>
     <!--各種jsファイルの読み込み-->
-    ../public/javascripts/
-    <script language="JavaScript" src="../public/javascripts/SceneCanvas.js"></script>
-    <script language="JavaScript" src="../public/javascripts/TitleScene.js"></script>
-    <script language="JavaScript" src="../public/javascripts/PlayScene.js"></script>
-    <script language="JavaScript" src="../public/javascripts/ResultScene.js"></script>
+    <script language="JavaScript" src="./public/javascripts/SceneCanvas.js"></script>
+    <script language="JavaScript" src="./public/javascripts/TitleScene.js"></script>
+    <script language="JavaScript" src="./public/javascripts/PlayScene.js"></script>
+    <script language="JavaScript" src="./public/javascripts/ResultScene.js"></script>
+    <script language="JavaScript" src="./socket.io/socket.io.js"></script>
     <script language="JavaScript">
-      
-      // htmlが全て読み込まれた後実行される
-      onload = function(){
-        var Images = {};
-        // 画像読み込み
-        var titleLogoImg = new Image();
-        titleLogoImg.src = "../public/images/codaTitle.png"
-        Images.titleLogo = titleLogoImg;
-        
-        var oppositionImg = new Image();
-        oppositionImg.src = "../public/images/opposition.png"
-        Images.opposition = oppositionImg;
 
-        var rankingImg = new Image();
-        rankingImg.src = "../public/images/ranking.png"
-        Images.ranking = rankingImg;
-        
-        var questionsImg= new Image();
-        questionsImg.src = "../public/images/questions.png"
-        Images.questions = questionsImg;
+        // htmlが全て読み込まれた後実行される
+        onload = function(){
+          var Images = {};
+          // 画像読み込み
+          var titleLogoImg = new Image();
+          titleLogoImg.src = "../public/images/codaTitle.png"
+          Images.titleLogo = titleLogoImg;
 
-        var practiceImg = new Image();
-        practiceImg.src = "../public/images/practice.png"
-        Images.practice = practiceImg;
+          var oppositionImg = new Image();
+          oppositionImg.src = "../public/images/opposition.png"
+          Images.opposition = oppositionImg;
 
-        var toStartImg= new Image();
-        toStartImg.src = "../public/images/toStart.png"
-        Images.toStart = toStartImg;
+          var rankingImg = new Image();
+          rankingImg.src = "../public/images/ranking.png"
+          Images.ranking = rankingImg;
 
-        init(Images);
-      }
-      
-      function init(Images){
-        var game = new Game(document.getElementById('mainCanvas'),1000,600);
+          var questionsImg= new Image();
+          questionsImg.src = "../public/images/questions.png"
+          Images.questions = questionsImg;
 
-        // game.~ => gameのメンバ変数になる
-        // TitleScene=>Title.js
-        var titleScene = new TitleScene(game,game.context,Images,"titleScene");
-        // game.gameScenes.push(titleScene);
-        // game.gameScenes['titleScene'] = titleScene;
-        game.addScene(titleScene);
-        game.setScene(titleScene);
+          var practiceImg = new Image();
+          practiceImg.src = "../public/images/practice.png"
+          Images.practice = practiceImg;
 
-        var playScene = new PlayScene(game,game.context,Images,"playScene");
-        // game.gameScenes.push(playScene);
-        // game.gameScenes['playScene'] = playScene;
-        game.addScene(playScene);
+          var toStartImg= new Image();
+          toStartImg.src = "../public/images/toStart.png"
+          Images.toStart = toStartImg;
 
-        var resultScene = new ResultScene(game,game.context,Images,"resultScene");
-        game.addScene(resultScene);
-        game.start();
-      }
-    </script>
-  </head>
-  <body>
-    <div align="center">
-      <canvas id='mainCanvas'> </canvas>
-    </div>
-  </body>
-</html>
+          init(Images);
+        }
+
+        function init(Images){
+          var game = new Game(document.getElementById('mainCanvas'),1000,600);
+
+          var titleScene = new TitleScene(game,game.context,Images,"titleScene");
+          game.addScene(titleScene);
+          game.setScene(titleScene);
+
+          var playScene = new PlayScene(game,game.context,Images,"playScene");
+          game.addScene(playScene);
+
+          var resultScene = new ResultScene(game,game.context,Images,"resultScene");
+          game.addScene(resultScene);
+          game.start();
+        }
+      </script>
+    </head>
+    <body>
+      <div align="center">
+        <canvas id='mainCanvas'> </canvas>
+      </div>
+    </body>
+  </html>

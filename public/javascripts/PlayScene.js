@@ -5,30 +5,59 @@ __input__ = new String();
 __completedCharacter__ = null;
 
 function PlayScene(game,context,Images,name){
-  //この関数はSceneを元にして出来ている(継承)
-  this.__proto__ = new Scene(game,context,name);
-  this.textList;
-  //初期化処理
-  this.init = function(){
-    this.completedTextList = new Array();
-    this.textList = getQuestion("textList");
-    var questionCharacter = new PlayCharacter(this,"QuestionCharacter",this.textList,"30pt Arial","#7d7d7d",0,100,100,100,100);
-    __completedCharacter__ = new CompletedCharacter(this,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
+//この関数はSceneを元にして出来ている(継承)
+this.__proto__ = new Scene(game,context,name);
+this.textList;
+//初期化処理
 
-    this.onkeydown= function(e){
-      //textの取得
-      var text = getQuestion("text");
-      whatKey(text,this.game);
+this.init = function(){
+  console.log("fugo");
+  
+/*----Session----*/
+    var socket = io.connect('http://localhost:8080');
+    console.log(socket);
+
+    socket.on('connect',  function(){
+      //クライアント側でgetStandbyイベント発火
+      socket.emit('getStandby');
+      socket.on('getRoomKey', function(key){
+        console.log("client: 受け取ったkey:" + key);
+        createRoom(key);
+      });
+    });
+
+    function createRoom(key){
+      var room = io.connect('http://localhost:8080/' + key);
+      room.on('connect', function(){
+        room.emit('msg send', 'userhoge');
+        room.on('msg push', function(msg){
+          console.log("client: msgが来ました = >" + msg);
+        });
+        /*serverとのやりとりはここから書いていく*/ 
+      });
     }
-    this.addParts(questionCharacter);
-    this.addParts(__completedCharacter__);
+
+
+/*----Game----*/
+  this.completedTextList = new Array();
+  this.textList = getQuestion("textList");
+  var questionCharacter = new PlayCharacter(this,"QuestionCharacter",this.textList,"30pt Arial","#7d7d7d",0,100,100,100,100);
+  __completedCharacter__ = new CompletedCharacter(this,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
+
+  this.onkeydown= function(e){
+    //textの取得
+    var text = getQuestion("text");
+    whatKey(text,this.game);
   }
+  this.addParts(questionCharacter);
+  this.addParts(__completedCharacter__);
+}
 } 
 
 
 //問題文を返すメソッド
 function getQuestion(kind){
-//   var text = "include<stdio.h>\n\tint main(void){\n\t\tprintf(\"Hello,World!\");\n\t\treturn 0;\n}"
+  //   var text = "include<stdio.h>\n\tint main(void){\n\t\tprintf(\"Hello,World!\");\n\t\treturn 0;\n}"
   var text = "abc";
 
   switch(kind){
@@ -88,17 +117,17 @@ function whatKey(text,game){
   //現在打つべき文字の先頭からの文字数
   this.text = text;
 
-  
+
   //charNumber文字目の文字列のUnicode値をa_charへ
   var a_char = this.text.charAt(__charCounter__);
   console.log("出題文字=> " + a_char);
   console.log("入力された文字=> " + String.fromCharCode(event.keyCode).toLowerCase());
 
   //入力が正しいか？
-//  if(String.fromCharCode(event.keyCode).toLowerCase() == a_char
-    console.log(a_char.charCodeAt(0));
-    console.log(event.keyCode);
-          
+  //  if(String.fromCharCode(event.keyCode).toLowerCase() == a_char
+  console.log(a_char.charCodeAt(0));
+  console.log(event.keyCode);
+
   if(event.keyCode == a_char.charCodeAt(0) - 32
       ||(event.keyCode == a_char.charCodeAt(0))
       || (event.keyCode == 188 && "<" == a_char)
@@ -117,21 +146,21 @@ function whatKey(text,game){
       || (event.keyCode == 188 && "," == a_char)
       || (event.keyCode == 49 && "!" == a_char)
       || (event.keyCode == 32 && "0" == a_char)
-      ){
-        console.log("正解です");
-        __charCounter__++;
-        if(__charCounter__ == this.text.length){
-          console.log
-            __charCounter__ = 0;
-          __input__ = new String();
-          __completedCharacter__ = null;
-          game.changeScene("resultScene");
-        }else{
-          repaint(game.scene,game);
-        }
-      }else {
-        console.log("違います");
+    ){
+      console.log("正解です");
+      __charCounter__++;
+      if(__charCounter__ == this.text.length){
+        console.log
+          __charCounter__ = 0;
+        __input__ = new String();
+        __completedCharacter__ = null;
+        game.changeScene("resultScene");
+      }else{
+        repaint(game.scene,game);
       }
+    }else {
+      console.log("違います");
+    }
 }
 
 function repaint(scene,game) {

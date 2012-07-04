@@ -5,20 +5,19 @@ __input__ = new String();
 __completedCharacter__ = null;
 
 function PlayScene(game,context,Images,name){
-//この関数はSceneを元にして出来ている(継承)
-this.__proto__ = new Scene(game,context,name);
-this.textList;
-//初期化処理
+  //この関数はSceneを元にして出来ている(継承)
+  this.__proto__ = new Scene(game,context,name);
+  this.textList;
+  //初期化処理
+  this.init = function(){
 
-this.init = function(){
-  console.log("fugo");
-  
-/*----Session----*/
+    /*----Session----*/
     var socket = io.connect('http://localhost:8080');
+    var scene = this;
     console.log(socket);
 
-    socket.on('connect',  function(){
-      //クライアント側でgetStandbyイベント発火
+    socket.on('connect', function(){
+      //getStandbyイベント発火
       socket.emit('getStandby');
       socket.on('getRoomKey', function(key){
         console.log("client: 受け取ったkey:" + key);
@@ -29,31 +28,31 @@ this.init = function(){
     function createRoom(key){
       var room = io.connect('http://localhost:8080/' + key);
       room.on('connect', function(){
-        room.emit('msg send', 'userhoge');
-        room.on('msg push', function(msg){
-          console.log("client: msgが来ました = >" + msg);
-        });
-        /*serverとのやりとりはここから書いていく*/ 
+        room.on('gameStart', function(members){
+          gameStart(scene,members);
+        });  
       });
     }
 
+    /*----Game----*/
+    this.completedTextList = new Array();
+    this.textList = getQuestion("textList");
+    var questionCharacter = new PlayCharacter(this,"QuestionCharacter",this.textList,"30pt Arial","#7d7d7d",0,100,100,100,100);
+    __completedCharacter__ = new CompletedCharacter(this,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
 
-/*----Game----*/
-  this.completedTextList = new Array();
-  this.textList = getQuestion("textList");
-  var questionCharacter = new PlayCharacter(this,"QuestionCharacter",this.textList,"30pt Arial","#7d7d7d",0,100,100,100,100);
-  __completedCharacter__ = new CompletedCharacter(this,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
-
-  this.onkeydown= function(e){
-    //textの取得
-    var text = getQuestion("text");
-    whatKey(text,this.game);
+    this.onkeydown= function(e){
+      //textの取得
+      var text = getQuestion("text");
+      whatKey(text,this.game);
+    }
+    this.addParts(questionCharacter);
+    this.addParts(__completedCharacter__);
   }
-  this.addParts(questionCharacter);
-  this.addParts(__completedCharacter__);
 }
-} 
 
+function gameStart(scene,members) {
+  
+}
 
 //問題文を返すメソッド
 function getQuestion(kind){

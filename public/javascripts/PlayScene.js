@@ -28,45 +28,42 @@ function PlayScene(game,context,Images,name){
     function createRoom(key){
       var room = io.connect('http://localhost:8080/' + key);
       room.on('connect', function(){
-        room.on('gameStart', function(members){
-          gameStart(scene,members);
+        room.on('gameStart', function(data){
+          console.log(scene);
+          gameStart(scene,data);
         });  
       });
+
+    }
+    function gameStart(scene,data) {
+      this.scene = scene;
+      this.scene.members = data["members"];
+      this.scene.questions = data["questions"];
+      console.log(this.scene.questions);
+      setParts(this.scene);
     }
 
     /*----Game----*/
-    this.completedTextList = new Array();
-    this.textList = getQuestion("textList");
-    var questionCharacter = new PlayCharacter(this,"QuestionCharacter",this.textList,"30pt Arial","#7d7d7d",0,100,100,100,100);
-    __completedCharacter__ = new CompletedCharacter(this,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
-
-    this.onkeydown= function(e){
-      //textの取得
-      var text = getQuestion("text");
-      whatKey(text,this.game);
+    function setParts(scene){
+      this.scene = scene;
+      console.log(this.scene);
+      this.completedTextList = new Array();
+      var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[1][1],"30pt Arial","#7d7d7d",0,100,100,100,100);
+      __completedCharacter__ = new CompletedCharacter(this.scene,"CompletedCharacter",this.completedTextList,"30pt Arial","#000000",1,100,100,100,100);
+      this.scene.addParts(questionCharacter);
+      this.scene.addParts(__completedCharacter__);
+      
+      this.scene.onkeydown = function(e){
+        var text = this.scene.questions[1][1];
+          whatKey(text,this.game);
+      }
     }
-    this.addParts(questionCharacter);
-    this.addParts(__completedCharacter__);
+
+
   }
 }
 
-function gameStart(scene,members) {
-  
-}
 
-//問題文を返すメソッド
-function getQuestion(kind){
-  //   var text = "include<stdio.h>\n\tint main(void){\n\t\tprintf(\"Hello,World!\");\n\t\treturn 0;\n}"
-  var text = "abc";
-
-  switch(kind){
-    case "textList":
-      var textList = text.split("\n");
-      return textList;
-    case "text":
-      return text;
-  }
-}
 
 function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,x,y,width,height);
@@ -75,7 +72,11 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.tmpY = y;
   this.font = font;
   this.color = color;
-  this.textList = textList;
+  this.tmp = textList.toString();
+  this.textList = this.tmp.split('\n');
+  console.log(this.scene.context);
+  console.log(this.context.fillStyle);
+
   //loop関数を上書き
   this.loop = function(){
     this.tmpY=this.y;

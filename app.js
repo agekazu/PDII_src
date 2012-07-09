@@ -54,8 +54,8 @@ function init(){
       nextKey = String(date.getTime());
       createNameSpece(nextKey);
       roomList[nextKey] = {"members":new Array(), "questions":new Array()};
-      socket.emit("getRoomKey", nextKey):v
-                                         s
+      socket.emit("getRoomKey", nextKey);
+                                         
     }else{
       socket.emit("getRoomKey", nextKey);
     }

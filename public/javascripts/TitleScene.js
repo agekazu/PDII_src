@@ -16,11 +16,11 @@ function TitleScene(game,context,Images,name){
     var cw = game.canvas.width;
 
     var titleLogo = new StartTitle(this,"startTitleLogo",0,Images.titleLogo,(cw/2) - th,0,th,th);
-    var oppositionImg = new StartButton(this,"oppositionImg",1,Images.opposition,
+    var oppositionImg = new StartButton(this,"oppositionImg",1,Images.practice,
         cw/2 + bw/2, ch/2 - bh, bw, bh);
     var rankingImg = new StartButton(this, "rankingImg",1,Images.ranking, 
         cw/2 + bw/2, ch/2 + bh, bw, bh);
-    var practiceImg =  new StartButton(this, "practiceImg",1,Images.practice, 
+    var practiceImg =  new StartButton(this, "practiceImg",1,Images.opposition, 
         cw/2 - bw * 2, ch/2 - bh, bw, bh);
     var questionsImg =  new StartButton(this, "questionsImg",1,Images.questions, 
         cw/2 - bw * 2, ch/2 + bh, bw, bh);
@@ -31,7 +31,6 @@ function TitleScene(game,context,Images,name){
     this.addParts(practiceImg);
     this.addParts(questionsImg);
   }
-
 
   function StartTitle(scene,name,layer,imgObj,x,y,width,height) {
     this.__proto__ = new Parts(scene,name,layer,x,y,width,height);

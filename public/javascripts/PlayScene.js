@@ -1,4 +1,4 @@
-//現在出題されている文字の先頭からの文字数
+//現在scene.出題されている文字の先頭からの文字数
 __charCounter__ = 0;
 //入力済み文字列が格納される
 __input__ = new String();
@@ -8,13 +8,9 @@ function PlayScene(game,context,Images,name){
   this.__proto__ = new Scene(game,context,name);
   //初期化処理
   this.init = function(){
-    var keyCodeHashs = keyCodeHash("JIS");
-    this.smallHash = keyCodeHashs[0];
-    this.capitalHash = keyCodeHashs[1];
-
+    var scene = this;
     /*----Session----*/
     var socket = io.connect('http://localhost:8080');
-    var scene = this;
     console.log(socket);
 
     socket.on('connect', function(){
@@ -30,28 +26,34 @@ function PlayScene(game,context,Images,name){
       var room = io.connect('http://localhost:8080/' + key);
       room.on('connect', function(){
         room.on('gameStart', function(data){
-          console.log(scene);
           gameStart(scene,data);
         });  
+        room.on('getProgress', function(data){
+          progressUpdata(scene,data["id"],data["percentage"]);
+        });
       });
       scene.room = room;
     }
 
     function gameStart(scene,data) {
       this.scene = scene;
+      this.keyDownFlag = false;
+      var keyCodeHashs = keyCodeHash("JIS");
+      this.scene.smallHash = keyCodeHashs[0];
+      this.scene.capitalHash = keyCodeHashs[1];
       this.scene.members = data["members"];
       //0:問題名 1:問題文
       this.scene.questions = data["questions"];
       this.scene.questionNumber = 0;
       this.scene.nowQuestion = this.scene.questions[0][1];
-      this.keyDownFlag = false;
       console.log(this.scene.questions);
 
-      /*----Game----*/
+      /*----カウントダウンParts生成----*/
       this.scene.completedTextList = new Array();
-      var countDownCharacter = new CountDownCharacter(this.scene,"countDownCharacter","30pt sans-serif","#000000",1,game.canvas.width/2,game.canvas.height/2,100,100);
+      var countDownCharacter = new CountDownCharacter(this.scene,"countDownCharacter","30pt Arial","#000000",1,game.canvas.width/2,game.canvas.height/2,100,100);
+      //0:1位になった回数 1:現在の進捗(％)
+      this.scene.membersScore = {"membersId":[0,0]}
       scene.addParts(countDownCharacter);
-
       this.scene.onkeydown = function(e){
         whatKey(this.game.scene.nowQuestion,this.game);
       }
@@ -68,6 +70,7 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.font = font;
   this.color = color;
   this.tmp = textList;
+  this.scene.textLength = this.tmp.length;//出題されている問題の文字数
   this.scene.textList = this.tmp.split('\n');
 
   //loop関数を上書き
@@ -82,7 +85,6 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
     },this);
   }
 }
-
 
 function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,x,y,width,height);
@@ -123,17 +125,75 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
       count = 30;
       if (0 >= countDown) {
         this.delete();
-      var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1]+"↲","30pt sans-serif","#7d7d7d",0,100,100,100,100);
-      this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt sans-serif","#000000",1,100,100,100,100);
-      this.scene.addParts(questionCharacter);
-      this.scene.addParts(this.scene.completedCharacter);
-      this.scene.keyDownFlag = true;
+        this.scene.keyDownFlag = true;
+        var progressBar = new ProgressBar(this.scene,"ProgressBar",1,20,500,700,50);
+        var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1]+"↲","30pt Arial","#7d7d7d",0,20,100,100,100);
+        this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt Arial","#000000",1,20,100,100,100);
+
+        this.scene.addParts(progressBar);
+        this.scene.addParts(questionCharacter);
+        this.scene.addParts(this.scene.completedCharacter);
       }
     }  
     count--;
   }
 }
 
+function ProgressBar(scene,name,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,x,y,width,height);
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+
+  this.grad = this.context.createLinearGradient(this.x,this.y,this.x,this.y+this.height);
+  this.grad.addColorStop(0,'rgb(192, 80, 77)');
+  this.grad.addColorStop(1,'rgb(255, 205, 205)');
+
+  scene.volume = 0;
+  scene.increment = 0;
+  this.speed = 1;
+
+  this.loop = function(){
+    //this.increment = scene.membersScore.membersId[1];
+    console.log(scene.increment);
+    console.log(scene.volume);
+    console.log(this.speed);
+    
+    if(scene.increment > 0){
+      scene.increment -= this.speed;
+      scene.volume += this.speed;
+    }else if(scene.increment < 0){
+      scene.increment += this.speed;
+      scene.volume -= this.speed;
+    }
+
+    if(scene.volume > 100){
+      scene.volume = 100;
+    }else if(scene.volume < 0){
+      scene.volume = 0;
+    }
+    this.context.beginPath();
+    this.context.fillStyle = this.grad;
+    this.context.rect(this.x,this.y,(scene.volume/100)*this.width,this.height);
+    this.context.fill();
+    this.context.strokeRect(this.x,this.y,this.width,this.height);
+    this.context.closePath();
+  }
+}
+
+
+function progressUpdata(scene,id,percentage) {
+  console.log("progressUpdata実行");
+  scene.membersScore.membersId[1] = percentage;
+  console.log("scene.memgersScore[1]:" + scene.membersScore.membersId[1]);
+  if (scene.membersScore.membersId[1] >= 100){
+    scene.volume = 0;
+    scene.increment = 0;
+    scene.membersScore.membersId[1] = 0;
+    scene.membersScore.membersId[0]++;
+  }  
+}
 //入力文字と出題文字が同じかを確かめるメソッド
 function whatKey(text,game){
   if(!game.scene.keyDownFlag){
@@ -145,86 +205,59 @@ function whatKey(text,game){
   //charNumber文字目の文字列のUnicode値をa_charへ
   var a_char = this.text.charAt(__charCounter__);
   console.log("出題文字=> " + a_char);
-  console.log("入力された文字=> " + String.fromCharCode(event.keyCode).toLowerCase());
+  console.log("入力された文字=> " + String.fromCharCode(event.keyCode));
 
-  //入力が正しいか？
-  //  if(String.fromCharCode(event.keyCode).toLowerCase() == a_char
-  console.log(a_char.charCodeAt(0));
-  console.log(event.keyCode);
-  
-/* if文が二重の場合 
-  if(event.shiftKey){
-    if(this.scene.capitalHash[event.keyCode] == a_char){
-      // 正解の時 
-    }else{
-      // 不正解の時
-    }
-  }else{
-    if(this.scene.smallHash[event.keyCode] == a_char){
-      // 正解の時 
-    }else{
-      // 不正解の時
-    }
-  }
-*/
-
-/* ハッシュを使い回す場合
+  // ハッシュを使い回す場合
   var keyHash;
   if(event.shiftKey){
-    keyHash = this.scene.capitalHash; 
+    keyHash = game.scene.capitalHash; 
   }else{
-    keyHash = this.scene.smallHash;
+    keyHash = game.scene.smallHash;
   }
+  
+  console.log("出題文字のキーコード "+a_char.charCodeAt(0));
+  console.log("入力されたキーコード "+event.keyCode);
+  console.log(event);
+  console.log(keyHash[event.keyCode]);
+  console.log(a_char);
+
   if(keyHash[event.keyCode] == a_char){
     //正解の時
+    console.log("正解です");
+    console.log("問題文の長さ:"+game.scene.textLength);
+    console.log("問題文の長さ/10:"+game.scene.textLength / 10);
+    console.log("問題文の長さ/10(小数点以下切り捨て)"+Math.floor(game.scene.textLength/10));
+    console.log("入力済み文字列 % 問題文の長さ/10"+__charCounter__ % Math.floor(game.scene.textLength/10));
+    //10％打ったら
+    if(__charCounter__ % Math.floor(game.scene.textLength/10)  == 0){
+      //membersId[1]更新したフラグ
+      this.scene.increment += 10;
+      scene.membersScore.membersId[1] += 10;
+      scene.room.emit('sendProgress',scene.membersScore.membersId);
+    }
+
+    __charCounter__++;
+    if(__charCounter__ == this.text.length){
+      __charCounter__ = 0;
+      __input__ = new String();
+      game.scene.completedCharacter = new Array();
+      game.scene.questionNumber++;
+      console.log(game.scene.textLength);
+      if(game.scene.questionNumber >= game.scene.questions.length){ 
+        game.changeScene('resultScene');
+      }else{
+        game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
+        game.scene.textList = game.scene.nowQuestion.split('\n');
+        repaint(game.scene,game);
+      }
+    }else{
+      repaint(game.scene,game);
+      //scene.room.emit('test','test');
+    }
   }else{
     //不正解の時
+    console.log("違います");
   }
-*/
-
-
-  //入力された文字==小文字？
-  if(event.keyCode == a_char.charCodeAt(0) - 32
-      || (event.keyCode == a_char.charCodeAt(0))
-      || (event.keyCode == 188 && "<" == a_char)
-      || (event.keyCode == 190 && ">" == a_char)
-      || (event.keyCode == 56 && "(" == a_char)
-      || (event.keyCode == 57 && ")" == a_char)
-      || (event.keyCode == 186 && ";" == a_char)
-      || (event.keyCode == 67 && ")" == a_char)
-      || (event.keyCode == 222 && '"' == a_char)
-      || (event.keyCode == 13 && "\n" == a_char)
-      || (event.keyCode == 9 && "\t" == a_char)
-      || (event.keyCode == 219 && "{" == a_char)
-      || (event.keyCode == 221 && "}" == a_char)
-      || (event.keyCode == 190 && "." == a_char)
-      || (event.keyCode == 32 && " " == a_char)
-      || (event.keyCode == 188 && "," == a_char)
-      || (event.keyCode == 49 && "!" == a_char)
-      || (event.keyCode == 32 && "0" == a_char)
-      || (event.keyCode == 51 && "#" == a_char)
-    ){
-      console.log("正解です");
-      __charCounter__++;
-      if(__charCounter__ == this.text.length){
-        __charCounter__ = 0;
-        __input__ = new String();
-        game.scene.completedCharacter = new Array();
-        game.scene.questionNumber++;
-        if(game.scene.questionNumber >= game.scene.questions.length){ 
-          game.changeScene('resultScene');
-        }else{
-          game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
-          game.scene.textList = game.scene.nowQuestion.split('\n');
-          repaint(game.scene,game);
-        }
-      }else{
-        repaint(game.scene,game);
-      //scene.room.emit('test','test');
-      }
-    }else {
-      console.log("違います");
-    }
 }
 
 //入力済み文字列の描画
@@ -243,6 +276,5 @@ function repaint(scene,game) {
     }
   }
 }
-
 
 

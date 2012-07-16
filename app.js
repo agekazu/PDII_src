@@ -30,8 +30,8 @@ function init(){
   var roomList = {} // 生成された部屋が格納される連想配列
   , standbyQueue = new Array() // 待機中のユーザを格納 
     , nextKey = 0 // 次のゲームのkey
-    , MAXMEMBERS = 1
-    , MAXQUESTIONS= 3;
+    , MAXMEMBERS = 1 // ゲーム開始時の人数
+    , MAXQUESTIONS = 5; // 出題数
   // connectionイベント
   io.sockets.on('connection', function(socket){
     socket.on('getStandby', function (){
@@ -48,6 +48,7 @@ function init(){
   });
 
 
+
   function getStandby(socket){
     if(nextKey == 0){
       var date = new Date();
@@ -55,7 +56,6 @@ function init(){
       createNameSpece(nextKey);
       roomList[nextKey] = {"members":new Array(), "questions":new Array()};
       socket.emit("getRoomKey", nextKey);
-                                         
     }else{
       socket.emit("getRoomKey", nextKey);
     }
@@ -70,7 +70,7 @@ function init(){
         //規定人数と等しいか？
         if(roomList[nextKey]["members"].length + 1 == MAXMEMBERS){
           roomList[nextKey]["members"].push(socket.id);
-           
+
           roomList[nextKey]["questions"] = createQuestion();
           room.emit('gameStart', roomList[nextKey]);
         }else if(roomList[nextKey]["members"].length + 1 >= MAXMEMBERS){
@@ -78,9 +78,12 @@ function init(){
         }else{
           roomList[nextKey]["members"].push(socket.id);
         }
-        room.on('test',function(msg){
-          /*clientとのやりとりはここから書いていく*/ 
+        socket.on('sendProgress', function(membersScore){
+          room.emit('getProgress', {"id":socket.id, "percentage":membersScore[1]
+          });
+          console.log(membersScore);
         });
+        /*clientとのやりとりはここから書いていく*/ 
       }); 
   }
 
@@ -101,10 +104,10 @@ function init(){
     }
 
     for(var i=0; i < MAXQUESTIONS; i++){
-        questions[i]=[queDir[i],fs.readFileSync('./questions/'+queDir[i],encoding='utf8')];
+      questions[i]=[queDir[i],fs.readFileSync('./questions/'+queDir[i],encoding='utf8')];
     }
     //プログラム言語名、その問題分が格納された２次元配列を返す
-     return questions;
+    return questions;
   }
 }//init()}
 
@@ -113,4 +116,5 @@ function init(){
 app.get('/', function(req, res) {
   res.sendfile(__dirname + '/views/index.html');
 });
+
 

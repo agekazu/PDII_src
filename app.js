@@ -79,9 +79,8 @@ function init(){
           roomList[nextKey]["members"].push(socket.id);
         }
         socket.on('sendProgress', function(membersScore){
-          room.emit('getProgress', {"id":socket.id, "percentage":membersScore[1]
-          });
-          console.log(membersScore);
+          room.emit('getProgress', {"id":socket.id, "percentage":membersScore[1]});
+          console.log("server:membersScore="+membersScore);
         });
         /*clientとのやりとりはここから書いていく*/ 
       }); 
@@ -90,7 +89,6 @@ function init(){
   function createQuestion(){
     var questions = new Array()
       , queDir;
-
     // questionsディレクトリ以下のファイルを配列で返す
     queDir = fs.readdirSync('./questions/');
     var i = queDir.length;

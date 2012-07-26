@@ -134,7 +134,6 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.keyDownFlag = true;
         var myProgressBar = new ProgressBar(this.scene,"myProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = myProgressBar;
-        //TODO
         this.scene.playerBars = [];
         this.scene.members.forEach(function(id){
           if (this.scene.myId != id){
@@ -173,8 +172,6 @@ function ProgressBar(scene,name,layer,x,y,width,height,id){
   this.grad.addColorStop(0,'rgb(192, 80, 77)');
   this.grad.addColorStop(1,'rgb(255, 205, 205)');
 
-
-  //TODO
   this.loop = function(){
     if(this.increment > 0){
       this.increment -= this.speed;

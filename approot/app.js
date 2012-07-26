@@ -30,7 +30,7 @@ function init(){
   var roomList = {} // 生成された部屋が格納される連想配列
   , standbyQueue = new Array() // 待機中のユーザを格納 
     , nextKey = 0 // 次のゲームのkey
-    , MAXMEMBERS = 1 // ゲーム開始時の人数
+    , MAXMEMBERS = 4 // ゲーム開始時の人数
     , MAXQUESTIONS = 5; // 出題数
   // connectionイベント
   io.sockets.on('connection', function(socket){
@@ -47,8 +47,6 @@ function init(){
     });
   });
 
-
-
   function getStandby(socket){
     if(nextKey == 0){
       var date = new Date();
@@ -60,7 +58,6 @@ function init(){
       socket.emit("getRoomKey", [nextKey, socket.id]);
     }
   }
-
 
   function createNameSpece(key){
     var room = io
@@ -107,7 +104,7 @@ function init(){
     //プログラム言語名、その問題分が格納された２次元配列を返す
     return questions;
   }
-}//init()}
+}//init()
 
 // httpサーバを立てる
 // ルートディレクトリにアクセスがあったら、index.htmlへ

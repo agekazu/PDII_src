@@ -12,7 +12,6 @@ function Scene(game,context,name){
   this.partsList = new Array();
   this.init = function(){
   }
-
 }
 
 //memo:prototype=>あるメソッドをオブジェクト化すると、そのオブジェクトから参照できるメソッド

@@ -9,7 +9,6 @@ function ResultScene(game,context,Images,name){
     var bh = 75;
     var ch = game.canvas.height;
     var cw = game.canvas.width;
-
     //ボタンの描画
     var toStartButton = new ResultButton(this,"toStartButton",1,Images.toStart,
         cw/2 - bw/2, ch/2 - bh, bw, bh); 
@@ -18,6 +17,29 @@ function ResultScene(game,context,Images,name){
     var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial",1,game.canvas.width/2-100,50,100,20);
 
+    //スコアを計算する
+    //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
+    this.rank = [];
+    this.myScore = 0;
+    game.resultData["members"].forEach(function(id){
+      var score;
+      if(this.game.resultData["score"][id]){
+        score = (this.game.resultData["score"][id][0] + 1) * this.game.resultData["score"][id][2];
+      }else{
+        score = 0;
+      }
+      if(id == this.game.resultData["myId"]){
+        this.myScore = score;
+      }
+      this.rank.push([id,score]);
+    },this);
+    
+    //スコアを昇順に配列に格納
+    this.rank.sort(function(a,b){
+      return(b[1] - a[1]);
+    });
+    console.log(this.rank);
+    console.log(this.myScore);
     this.addParts(toStartButton);
     this.addParts(resultCharacter);
   }

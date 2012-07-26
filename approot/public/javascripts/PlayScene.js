@@ -12,14 +12,13 @@ function PlayScene(game,context,Images,name){
     var scene = this;
     /*----Session----*/
     var socket = io.connect('http://localhost:8080');
-    console.log(socket);
 
     socket.on('connect', function(){
       //getStandbyイベント発火
       socket.emit('getStandby');
       socket.on('getRoomKey', function(data){
-        console.log("client: 受け取ったkey:" + data[0]);
-        console.log(data[1]);
+        //console.log("client: 受け取ったkey:" + data[0]);
+        //自分のIDをmyIdに格納
         scene.myId = data[1];
         createRoom(data[0]);
       });
@@ -50,12 +49,11 @@ function PlayScene(game,context,Images,name){
       this.scene.questionNumber = 0;
       this.scene.nowQuestion = this.scene.questions[0][1];
       this.scene.tabCount = 0;
-      console.log(this.scene.questions);
 
       /*----カウントダウンParts生成----*/
       this.scene.completedTextList = new Array();
       var countDownCharacter = new CountDownCharacter(this.scene,"countDownCharacter","30pt Arial","#000000",1,game.canvas.width/2,game.canvas.height/2,100,100);
-      //0:1位になった回数 1:現在の進捗(％)
+      //0:1位になった回数 1:現在の進捗(％) 2:スコア(進捗の合計)
       this.scene.membersScore = {};
       scene.addParts(countDownCharacter);
       this.scene.onkeydown = function(e){
@@ -73,7 +71,6 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.tmpY = y;
   this.font = font;
   this.color = color;
-  console.log(textList);
   this.scene.textLength = textList.length;//出題されている問題の文字数
   this.tmp = textList.replace(/\n/g,'↲\n');
   this.tmp = this.tmp.replace(/\t/g,'»---');
@@ -135,12 +132,22 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.score = 0;
         this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
-        var progressBar = new ProgressBar(this.scene,"ProgressBar",1,20,500,700,50);
-        this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
+        var myProgressBar = new ProgressBar(this.scene,"myProgressBar",1,20,500,680,50,this.scene.myId);
+        this.scene.bar = myProgressBar;
+        //TODO
+        this.scene.playerBars = [];
+        this.scene.members.forEach(function(id){
+          if (this.scene.myId != id){
+            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,600,50+(this.scene.playerBars.length*50+5),200,25,id);
+            this.scene.playerBars[id] = playerProgressBar;
+            this.scene.addParts(playerProgressBar);
+          }
+        },this);
         var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt Arial","#7d7d7d",0,20,100,100,100);
+        this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
         this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt Arial","#000000",1,20,100,100,100);
 
-        this.scene.addParts(progressBar);
+        this.scene.addParts(myProgressBar);
         this.scene.addParts(questionCharacter);
         this.scene.addParts(this.scene.completedCharacter);
       }
@@ -149,37 +156,42 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
   }
 }
 
-function ProgressBar(scene,name,layer,x,y,width,height){
+function ProgressBar(scene,name,layer,x,y,width,height,id){
   this.__proto__ = new Parts(scene,name,x,y,width,height);
   this.scene = scene;
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
+  this.id = id;
+  this.volume = 0;
+  this.increment = 0;
+  this.emitCounter = 0;
+  this.speed = 1;
 
   this.grad = this.context.createLinearGradient(this.x,this.y,this.x,this.y+this.height);
   this.grad.addColorStop(0,'rgb(192, 80, 77)');
   this.grad.addColorStop(1,'rgb(255, 205, 205)');
-  this.scene.bar = {"volume":0, "increment":0, "emitCounter":0}
-  this.speed = 1;
 
+
+  //TODO
   this.loop = function(){
-    if(this.scene.bar.increment > 0){
-      this.scene.bar.increment -= this.speed;
-      this.scene.bar.volume += this.speed;
-    }else if(this.scene.bar.increment < 0){
-      this.scene.bar.increment += this.speed;
-      this.scene.bar.volume -= this.speed;
+    if(this.increment > 0){
+      this.increment -= this.speed;
+      this.volume += this.speed;
+    }else if(this.increment < 0){
+      this.increment += this.speed;
+      this.volume -= this.speed;
     }
 
-    if(this.scene.bar.volume > 100){
-      this.scene.bar.volume = 100;
-    }else if(this.scene.bar.volume < 0){
-      this.scene.bar.volume = 0;
+    if(this.volume > 100){
+      this.volume = 100;
+    }else if(this.volume < 0){
+      this.volume = 0;
     }
     this.context.beginPath();
     this.context.fillStyle = this.grad;
-    this.context.rect(this.x,this.y,(this.scene.bar.volume/100)*this.width,this.height);
+    this.context.rect(this.x,this.y,(this.volume/100)*this.width,this.height);
     this.context.fill();
     this.context.strokeRect(this.x,this.y,this.width,this.height);
     this.context.closePath();
@@ -188,20 +200,21 @@ function ProgressBar(scene,name,layer,x,y,width,height){
 
 
 function progressUpdata(game,scene,id,percentage) {
-  console.log("progressUpdata実行");
   if(!scene.membersScore[id]){
-    scene.membersScore[id] = [0,0];
+    scene.membersScore[id] = [0,0,0];
   }
   scene.membersScore[id][1] = percentage;
-  console.log("scene.memgersScore:" + scene.membersScore[id][1]);
+  //console.log("scene.memgersScore:" + scene.membersScore[id][1]);
+
   if (percentage >= 100){
+    //scene.myIdだった場合
     __charCounter__ = 0;
     game.scene.tabCount = 0;
     __input__ = new String();
     game.scene.completedCharacter = new Array();
     game.scene.questionNumber++;
-    console.log(game.scene.textLength);
     if(game.scene.questionNumber >= game.scene.questions.length){ 
+      game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId};
       game.changeScene('resultScene');
     }else{
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
@@ -214,12 +227,26 @@ function progressUpdata(game,scene,id,percentage) {
     }
     scene.bar.volume = 0;
     scene.bar.increment = 0;
+    scene.members.forEach(function(id){
+      if(this.scene.myId != id){
+        this.scene.playerBars[id].increment = 0;
+        this.scene.playerBars[id].volume = 0;
+      }
+    },this);
     scene.membersScore[id][0]++;
-    scene.membersScore[id].forEach(function(percentage){
-      percentage = 0;
-    });
-  } 
+    scene.members.forEach(function(id){
+      if(this.scene.membersScore[id]){
+        this.scene.membersScore[id][2] += this.scene.membersScore[id][1];
+        this.scene.membersScore[id][1] = 0;
+      }
+    },this);
+  }else{
+    if(scene.myId != id){
+      scene.playerBars[id].increment += 10;
+    }
+  }
 }
+
 
 
 //入力文字と出題文字が同じかを確かめるメソッド
@@ -232,8 +259,8 @@ function whatKey(text,game){
 
   //charNumber文字目の文字列のUnicode値をa_charへ
   var a_char = this.text.charAt(__charCounter__);
-  console.log("出題文字=> " + a_char);
-  console.log("入力された文字=> " + String.fromCharCode(event.keyCode));
+  //console.log("出題文字=> " + a_char);
+  //console.log("入力された文字=> " + String.fromCharCode(event.keyCode));
 
   // keyHashの選択
   var keyHash;
@@ -246,21 +273,17 @@ function whatKey(text,game){
   if(!keyHash[event.keyCode]){
     return;
   }
-  console.log("出題文字のキーコード "+a_char.charCodeAt(0));
-  console.log("入力されたキーコード "+event.keyCode);
-  console.log(event);
-  console.log(keyHash[event.keyCode]);
-  console.log(a_char);
+  //console.log("出題文字のキーコード "+a_char.charCodeAt(0));
+  //console.log("入力されたキーコード "+event.keyCode);
 
   if(keyHash[event.keyCode][0] == a_char || keyHash[event.keyCode][1] == a_char){
     // 正解の時
-    console.log("正解です");
-    console.log("問題文の長さ="+game.scene.textLength);
-    console.log("問題文の長さ/10="+game.scene.textLength / 10);
-    console.log("問題文の長さ/10(小数点以下切り捨て)="+Math.floor(game.scene.textLength/10));
-    console.log("入力済み文字列の長さ="+__charCounter__);
-    console.log(game.scene.bar.emitCounter);
-    console.log("入力済み文字列 % 問題文の長さ/10="+__charCounter__ % Math.floor(game.scene.textLength/10));
+    //console.log("正解です");
+    //console.log("問題文の長さ="+game.scene.textLength);
+    //console.log("問題文の長さ/10="+game.scene.textLength / 10);
+    //console.log("問題文の長さ/10(小数点以下切り捨て)="+Math.floor(game.scene.textLength/10));
+    //console.log("入力済み文字列の長さ="+__charCounter__);
+    //console.log("入力済み文字列 % 問題文の長さ/10="+__charCounter__ % Math.floor(game.scene.textLength/10));
 
     __charCounter__++;
     // 10％打ったら
@@ -275,6 +298,7 @@ function whatKey(text,game){
       }
     }
 
+    //タブキーが押されたら
     if(event.keyCode == 9){
       game.scene.tabCount += __tabSpace__ - 1;
     }
@@ -282,7 +306,7 @@ function whatKey(text,game){
 
   }else{
     //不正解の時
-    console.log("違います");
+    //console.log("違います");
   }
 }
 
@@ -302,5 +326,4 @@ function repaint(scene,game) {
     }
   }
 }
-
 

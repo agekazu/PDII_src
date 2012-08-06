@@ -9,8 +9,8 @@
     <script language="JavaScript" src="/javascripts/SceneCanvas.js"></script>
     <script language="JavaScript" src="/javascripts/TitleScene.js"></script>
     <script language="JavaScript" src="/javascripts/PlayScene.js"></script>
-    <script language="JavaScript" src="/javascripts/PracticeScene.js"></script>
     <script language="JavaScript" src="/javascripts/ResultScene.js"></script>
+    <script language="JavaScript" src="/javascripts/PracticeScene.js"></script>
     <script language="JavaScript" src="/javascripts/PracticeResultScene.js"></script>
     <script language="JavaScript" src="/javascripts/keyCodeHash.js"></script>
     <script language="JavaScript" src="/socket.io/socket.io.js"></script>
@@ -23,60 +23,80 @@
 
       // htmlが全て読み込まれた後実行される
       onload = function(){
-        var Images = {};
+        var resouces = {};
         // 画像読み込み
         var titleLogoImg = new Image();
-        titleLogoImg.src = "/images/codaTitle.png";
-        Images.titleLogo = titleLogoImg;
-
+        titleLogoImg.src = "/resouces/codaTitle.png";
+        resouces["titleLogo"] = titleLogoImg;
+        
         var oppositionImg = new Image();
-        oppositionImg.src = "/images/opposition.png";
-        Images.opposition = oppositionImg;
+        oppositionImg.src = "/resouces/opposition.png";
+        resouces["opposition"] = oppositionImg;
 
         var rankingImg = new Image();
-        rankingImg.src = "/images/ranking.png";
-        Images.ranking = rankingImg;
+        rankingImg.src = "/resouces/ranking.png";
+        resouces["ranking"] = rankingImg;
 
         var questionsImg= new Image();
-        questionsImg.src = "/images/questions.png";
-        Images.questions = questionsImg;
+        questionsImg.src = "/resouces/questions.png";
+        resouces["questions"] = questionsImg;
 
         var practiceImg = new Image();
-        practiceImg.src = "/images/practice.png";
-        Images.practice = practiceImg;
+        practiceImg.src = "/resouces/practice.png";
+        resouces["practice"] = practiceImg;
 
         var toStartImg = new Image();
-        toStartImg.src = "/images/toStart.png";
-        Images.toStart = toStartImg;
+        toStartImg.src = "/resouces/toStart.png";
+        resouces["toStart"] = toStartImg;
 
         var postTwitterImg = new Image();
-        postTwitterImg.src = "/images/postTwitter.png";
-        Images.postTwitter = postTwitterImg;
+        postTwitterImg.src = "/resouces/postTwitter.png";
+        resouces["postTwitter"] = postTwitterImg;
 
-        init(Images);
+        var typeSound = new Audio("./resouces/type.wav");
+        //        typeSound.src = "/resouces/type.mp3";
+        //        resouces["typeSound"] = typeSound;
+        console.log(typeSound.loop);
+        typeSound.onload = function(){
+          console.log("hogehoge");
+        }
+        init(resouces);
       }
 
-      function init(Images){
+      function init(resouces){
         var game = new Game(document.getElementById('mainCanvas'),1000,600);
+        game.resouces = resouces;
 
-        var titleScene = new TitleScene(game,game.context,Images,"titleScene");
+        var titleScene = new TitleScene(game,game.context,resouces,"titleScene");
         game.addScene(titleScene);
         game.setScene(titleScene);
 
-        var practiceScene = new PracticeScene(game,game.context,Images,"practiceScene");
-        game.addScene(practiceScene);
-        
-        var playScene = new PlayScene(game,game.context,Images,"playScene");
+        var playScene = new PlayScene(game,game.context,resouces,"playScene");
         game.addScene(playScene);
 
-        var practiceResultScene = new PracticeResultScene(game,game.context,Images,"practiceResultScene");
-        game.addScene(practiceResultScene);
-        
-        var resultScene = new ResultScene(game,game.context,Images,"resultScene");
+        var resultScene = new ResultScene(game,game.context,resouces,"resultScene");
         game.addScene(resultScene);
 
-        game.start();
+        var practiceScene = new PracticeScene(game,game.context,resouces,"practiceScene");
+        game.addScene(practiceScene);
+
+        var practiceResultScene = new PracticeResultScene(game,game.context,resouces,"practiceResultScene");
+        game.addScene(practiceResultScene);
+
+        var resouceCounter = 0;
+        var resouceLength = 0;
+        //画像のonload
+        for(var key in resouces){
+          resouceLength++;
+          resouces[key].onload = function(){
+            resouceCounter++;
+            if(resouceCounter == resouceLength){
+              game.start();
+            }
+          }
+        }
       }
+
     </script>
   </head>
   <body>

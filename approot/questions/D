@@ -1,7 +1,2 @@
-private import std.stdio;
- 
-void main()
-{
-    writeln("Hello, world!");
-}
-
+4	D_HelloWorld
+ddddddddddddddddddddddddd

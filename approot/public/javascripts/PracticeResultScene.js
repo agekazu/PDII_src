@@ -1,4 +1,4 @@
-function ResultScene(game,context,Images,name){
+function PracticeResultScene(game,context,Images,name){
   //この関数はSceneを元にして出来ている(Sceneの継承)
   this.__proto__ = new Scene(game,context,name);
 
@@ -23,47 +23,13 @@ function ResultScene(game,context,Images,name){
     //スコアを計算する
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
 
-    this.rank = [];
-    this.myScore = 0;
-    //resltDataに格納されたキーmembersを回す
-    console.log(this.game.resultData);
-    this.game.resultData["members"].forEach(function(id){
-      var score;
-      //resltData["score"][id]が存在するなら
-      if(this.game.resultData["score"][id]){
         //得点を出す。(1位の数+1) * 進捗(%)の和
         score = (this.game.resultData["score"][id][0] + 1) * this.game.resultData["score"][id][2];
-      }else{
-        score = 0;
-      }
-      //もし自分のデータならば
-      if(id == this.game.resultData["myId"]){
         this.myScore = score;
-      }
       //配列rankにプッシュ
-      this.rank.push([id,score]);
-    },this);
-
-    //スコアを昇順に配列に格納
-    this.rank.sort(function(a,b){
-      return(b[1] - a[1]);
-    });
 
     //ランキング表示
-    var i = 1;
-    this.rank.forEach(function(rank){
-      if(rank[0] != this.game.resultData["myId"]){
-        console.log(i);
-        var rankingCharacter = new ResultCharacter(this,"rankingCharacter",i+"位  "+rank[1]+"点",
-          "25pt Arial","#000000",1,cw/2-50,75*i+45,200,25);
-      }else{
-        this.myRank = i;
-        var rankingCharacter = new ResultCharacter(this,"rankingCharacter",i+"位  "+rank[1]+"点",
-          "25pt Arial","#ff0000",1,cw/2-50,75*i+45,200,25);
-      }
-      i++;
-      this.addParts(rankingCharacter);
-    },this);
+        var rankingCharacter = new ResultCharacter(this,"rankingCharacter","あなたのスコアは"+this.myScore+"点です。","25pt Arial","#000000",1,cw/2-50,75*i+45,200,25);
 
     this.addParts(toStartButton);
     this.addParts(postTwitterButton);

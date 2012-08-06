@@ -37,7 +37,8 @@ function init(){
     socket.on('getStandby', function (){
       getStandby(socket);
     });
-    socket.on('getPracticeQuestion',function(){
+    socket.on('getPracticeQuestions',function(){
+      socket.emit("getQuestion", createQuestion());
     });
     socket.on('sendNewRecord',function(){
     });
@@ -89,7 +90,6 @@ function init(){
     // questionsディレクトリ以下のファイルを配列で返す
     queDir = fs.readdirSync('./questions/');
     var i = queDir.length;
-
     //配列をシャッフルする。
     while(i){
       var j = Math.floor(Math.random()*i);
@@ -99,9 +99,18 @@ function init(){
     }
 
     for(var i=0; i < MAXQUESTIONS; i++){
-      questions[i]=[queDir[i],fs.readFileSync('./questions/'+queDir[i],encoding='utf8')];
+      var info = [];
+      var input = fs.readFileSync('./questions/'+queDir[i],encoding='utf8');
+      //問題の1行目：問題文の番号<tab>言語名_HelloWorld
+      var infoline = input.split("\n")[0];
+      info[0] = infoline.split("\t")[0];
+      info[1] = infoline.split("\t")[1];
+      console.log(info[0]);
+      console.log(info[1]);
+      console.log(info);
+      questions[i] = [info, input.replace(infoline+"\n", "")];
     }
-    //プログラム言語名、その問題分が格納された２次元配列を返す
+    //問題番号、言語名、問題文が格納された配列を返す
     return questions;
   }
 }//init()

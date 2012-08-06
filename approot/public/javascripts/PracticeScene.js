@@ -4,7 +4,7 @@ __tabSpace__ = 4;
 //入力済み文字列が格納される
 __input__ = new String();
 
-function PlayScene(game,context,Images,name){
+function PracticeScene(game,context,Images,name){
   //この関数はSceneを元にして出来ている(継承)
   this.__proto__ = new Scene(game,context,name);
   //初期化処理
@@ -15,38 +15,35 @@ function PlayScene(game,context,Images,name){
 
     socket.on('connect', function(){
       //getStandbyイベント発火
-      socket.emit('getStandby');
-      socket.on('getRoomKey', function(data){
-        //console.log("client: 受け取ったkey:" + data[0]);
-        //自分のIDをmyIdに格納
-        scene.myId = data[1];
-        createRoom(data[0]);
+      socket.emit('getPracticeQuestions');
+      socket.on('getQuestion', function(questions){
+        //data=>2次元配列
+        gameStart(scene,questions)
       });
     });
 
-    function createRoom(key){
-      var room = io.connect('http://localhost:8080/' + key);
-      room.on('connect', function(){
-        room.on('gameStart', function(data){
-          gameStart(scene,data);
-        });  
-        room.on('getProgress', function(data){
-          progressUpdata(game,scene,data["id"],data["percentage"]);
-        });
-      });
-      scene.room = room;
-    }
+//    function createRoom(key){
+//      var room = io.connect('http://localhost:8080/' + key);
+//      room.on('connect', function(){
+//        room.on('gameStart', function(data){
+//          gameStart(this,data);
+//        });  
+//        room.on('getProgress', function(data){
+//        });
+//      });
+//      scene.room = room;
+//    }
 
-    function gameStart(scene,data) {
+    function gameStart(scene,questions) {
       this.scene = scene;
       this.keyDownFlag = false;
       var keyCodeHashs = keyCodeHash("JIS");
       this.scene.smallHash = keyCodeHashs[0];
       this.scene.capitalHash = keyCodeHashs[1];
-      this.scene.members = data["members"];
       //0:0:問題番号,1:言語名_問題の種類 1:問題文
-      this.scene.questions = data["questions"];
+      this.scene.questions = questions;
       this.scene.questionNumber = 0;
+      this.scene.myPercentage = 0;
       this.scene.nowQuestion = this.scene.questions[0][1];
       console.log(this.scene.questions);
       console.log(this.scene.questions[0][1]);
@@ -120,7 +117,6 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
   this.color = color;
   var count = 30;
   var countDown = 5;
-
   this.loop = function(){
     this.context.fillStyle = this.color;
     this.context.font = this.font;
@@ -131,20 +127,20 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
       if (0 >= countDown) {
         this.delete();
         this.scene.score = 0;
-        this.scene.winnerCount = 0;
+        //        this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
         var myProgressBar = new ProgressBar(this.scene,"myProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = myProgressBar;
-        this.scene.playerBars = [];
+        //        this.scene.playerBars = [];
         progressBarCounter = 0;
-        this.scene.members.forEach(function(id){
-          if (this.scene.myId != id){
-            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
-            progressBarCounter++;
-            this.scene.playerBars[id] = playerProgressBar;
-            this.scene.addParts(playerProgressBar);
-          }
-        },this);
+        //       this.scene.members.forEach(function(id){
+        //          if (this.scene.myId != id){
+        //            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
+        //            progressBarCounter++;
+        //            this.scene.playerBars[id] = playerProgressBar;
+        //            this.scene.addParts(playerProgressBar);
+        //          }
+        //        },this);
         var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
         this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
@@ -199,15 +195,14 @@ function ProgressBar(scene,name,layer,x,y,width,height,id){
 }
 
 
-function progressUpdata(game,scene,id,percentage) {
-  if(!scene.membersScore[id]){
-    scene.membersScore[id] = [0,0,0];
-  }
-  scene.membersScore[id][1] = percentage;
+function progressUpdata(game,scene,percentage) {
+  //  if(!scene.membersScore[id]){
+  //    scene.membersScore[id] = [0,0,0];
+  //  }
+  //  scene.membersScore[id][1] = percentage;
   //console.log("scene.memgersScore:" + scene.membersScore[id][1]);
 
   if (percentage >= 100){
-    //scene.myIdだった場合
     __charCounter__ = 0;
     game.scene.tabCount = 0;
     __input__ = new String();
@@ -215,8 +210,9 @@ function progressUpdata(game,scene,id,percentage) {
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
-      game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId};
-      game.changeScene('resultScene');
+      console.log("終了");
+      game.resultData = {"score":game.scene.membersScore,"myId":game.scene.myId};
+      game.changeScene('practiceResultScene');
     }else{
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
       game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
@@ -228,24 +224,23 @@ function progressUpdata(game,scene,id,percentage) {
     }
     scene.bar.volume = 0;
     scene.bar.increment = 0;
-    scene.members.forEach(function(id){
-      if(this.scene.myId != id){
-        this.scene.playerBars[id].increment = 0;
-        this.scene.playerBars[id].volume = 0;
-      }
-    },this);
-    scene.membersScore[id][0]++;
-    scene.members.forEach(function(id){
-      if(this.scene.membersScore[id]){
-        this.scene.membersScore[id][2] += this.scene.membersScore[id][1];
-        this.scene.membersScore[id][1] = 0;
-      }
-    },this);
-  }else{
-    if(scene.myId != id){
-      scene.playerBars[id].increment += 10;
-    }
-  }
+    scene.myPercentage = 0;
+    //scene.playerBars[id].increment += 10;
+    //    scene.members.forEach(function(id){
+    //      if(this.scene.myId != id){
+    //        this.scene.playerBars[id].increment = 0;
+    //        this.scene.playerBars[id].volume = 0;
+    //      }
+    //    },this);
+    //    scene.membersScore[id][0]++;
+    //    scene.members.forEach(function(id){
+    //      if(this.scene.membersScore[id]){
+    //        this.scene.membersScore[id][2] += this.scene.membersScore[id][1];
+    //        this.scene.membersScore[id][1] = 0;
+    //      }
+    //    },this);
+    //  }else{
+}
 }
 
 
@@ -290,11 +285,13 @@ function whatKey(text,game){
     // 10％打ったら
     if(__charCounter__ >= game.scene.bar.emitCounter){
       game.scene.bar.increment += 10;
+      game.scene.myPercentage += 10;
       game.scene.bar.emitCounter += game.scene.nowQuestion.length/10;
+      //TODO 
+      progressUpdata(game,game.scene,game.scene.myPercentage);
       game.scene.score += 10;
-      game.scene.room.emit('sendProgress',[game.scene.winnerCount, game.scene.score]);
       if(game.scene.score == 100){
-        game.scene.winnerCount++;
+        //  game.scene.winnerCount++;
         game.scene.score = 0;
       }
     }

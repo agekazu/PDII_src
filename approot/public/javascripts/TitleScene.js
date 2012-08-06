@@ -16,13 +16,13 @@ function TitleScene(game,context,Images,name){
     var cw = game.canvas.width;
 
     var titleLogo = new StartTitle(this,"startTitleLogo",0,Images.titleLogo,(cw/2) - th,0,th,th);
-    var oppositionImg = new StartButton(this,"oppositionImg",1,Images.practice,
+    var practiceImg = new StartButton(this,"practiceButton",1,Images.practice,
         cw/2 + bw/2, ch/2 - bh, bw, bh);
-    var rankingImg = new StartButton(this, "rankingImg",1,Images.ranking, 
+    var rankingImg = new StartButton(this, "rankingButton",1,Images.ranking, 
         cw/2 + bw/2, ch/2 + bh, bw, bh);
-    var practiceImg =  new StartButton(this, "practiceImg",1,Images.opposition, 
+    var oppositionImg =  new StartButton(this, "oppositionButton",1,Images.opposition, 
         cw/2 - bw * 2, ch/2 - bh, bw, bh);
-    var questionsImg =  new StartButton(this, "questionsImg",1,Images.questions, 
+    var questionsImg =  new StartButton(this, "questionsButton",1,Images.questions, 
         cw/2 - bw * 2, ch/2 + bh, bw, bh);
 
     this.addParts(titleLogo);
@@ -55,9 +55,17 @@ function TitleScene(game,context,Images,name){
       var mouseY = this.game.mouseY;
       if(mouseX >= this.x && mouseX <= this.x + this.width
           && mouseY >= this.y && mouseY <= this.y + this.height){
-            console.log("Play画面へ遷移");
-            this.game.changeScene("playScene");
-          } 
+            switch(name){
+              case "oppositionButton": 
+                console.log("Play画面へ遷移");
+                this.game.changeScene("playScene");
+                break;
+              case "practiceButton":
+                console.log("Practice画面へ遷移");
+                this.game.changeScene("practiceScene");
+                break;
+            } 
+          }
     }
   }
 }

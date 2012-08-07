@@ -11,25 +11,24 @@ function PracticeResultScene(game,context,Images,name){
     var ch = this.game.canvas.height;
     var cw = this.game.canvas.width;
     //ボタンの描画
-    var toStartButton = new ResultButton(this,"toStartButton",1,Images.toStart,
+    var toStartButton = new PracticeResultButton(this,"toStartButton",1,Images["toStart"],
         cw/4 - bw/2 , ch-200, bw, bh); 
-    var postTwitterButton = new ResultButton(this,"postTwitterButton",1,Images.postTwitter,
-        cw/2 - bw/2, ch-200, bw, bh); 
+    var postTwitterButton = new PracticeResultButton(this,"postTwitterButton",1,Images["postTwitter"],cw/2 - bw/2, ch-200, bw, bh); 
 
     //タイトルの描画
-    var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
+    var resultCharacter = new PracticeResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial","#000000",1,cw/2-40,50,100,20);
 
     //スコアを計算する
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
 
-        //得点を出す。(1位の数+1) * 進捗(%)の和
-        score = (this.game.resultData["score"][id][0] + 1) * this.game.resultData["score"][id][2];
-        this.myScore = score;
-      //配列rankにプッシュ
+    //得点を出す。(1位の数+1) * 進捗(%)の和
+    score = 0;
+    this.myScore = score;
+    //配列rankにプッシュ
 
     //ランキング表示
-        var rankingCharacter = new ResultCharacter(this,"rankingCharacter","あなたのスコアは"+this.myScore+"点です。","25pt Arial","#000000",1,cw/2-50,75*i+45,200,25);
+    var rankingCharacter = new PracticeResultCharacter(this,"rankingCharacter","あなたのスコアは"+this.myScore+"点です。","25pt Arial","#000000",1,cw/2-50,75*i+45,200,25);
 
     this.addParts(toStartButton);
     this.addParts(postTwitterButton);
@@ -39,7 +38,7 @@ function PracticeResultScene(game,context,Images,name){
 
 
 //GUI部品(.png)の描画
-function ResultButton(scene,name,layer,imgObj,x,y,width,height){
+function PracticeResultButton(scene,name,layer,imgObj,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.scene = scene;
   this.imgObj = imgObj;
@@ -69,7 +68,7 @@ function ResultButton(scene,name,layer,imgObj,x,y,width,height){
 
 
 //文字列の描画
-function ResultCharacter(scene,name,text,font,color,layer,x,y,width,height){
+function PracticeResultCharacter(scene,name,text,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.font = font;
   this.color = color;

@@ -23,7 +23,9 @@ function PlayScene(game,context,Images,name){
         createRoom(data[0]);
       });
     });
-
+    //waitingを表示
+    var waitingCharacter = new PlayCharacter(this,"waitingCharacter","waiting...","30pt monospace","#000000",0,game.canvas.width-200,game.canvas.height-50,100,100);
+    this.addParts(waitingCharacter);
     function createRoom(key){
       var room = io.connect('http://localhost:8080/' + key);
       room.on('connect', function(){
@@ -38,6 +40,7 @@ function PlayScene(game,context,Images,name){
     }
 
     function gameStart(scene,data) {
+      waitingCharacter.delete();
       this.scene = scene;
       this.keyDownFlag = false;
       var keyCodeHashs = keyCodeHash("JIS");
@@ -67,7 +70,7 @@ function PlayScene(game,context,Images,name){
 
 
 function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.tmpY = y;
@@ -92,7 +95,7 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
 }
 
 function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.tmpY = y;
@@ -113,7 +116,7 @@ function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,heigh
 }
 
 function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.font = font;
@@ -129,6 +132,7 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
       countDown--;
       count = 30;
       if (0 >= countDown) {
+        this.game.sounds["changeSound"].play();
         this.delete();
         this.scene.score = 0;
         this.scene.winnerCount = 0;
@@ -154,12 +158,13 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.addParts(this.scene.completedCharacter);
       }
     }  
+    this.game.sounds["countdownSound"].play();
     count--;
   }
 }
 
 function ProgressBar(scene,name,layer,x,y,width,height,id){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.scene = scene;
   this.x = x;
   this.y = y;
@@ -215,9 +220,14 @@ function progressUpdata(game,scene,id,percentage) {
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
+      //終了音
+      game.sounds["finishSound"].play();
       game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId};
       game.changeScene('resultScene');
     }else{
+      //問題が遷移するとき
+      //遷移音
+      game.sounds["changeSound"].play();
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
       game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
       game.scene.textList = game.scene.textList.replace(/\t/g,'»---');
@@ -255,6 +265,8 @@ function whatKey(text,game){
   if(!game.scene.keyDownFlag){
     return;
   }
+  //打鍵音
+  game.sounds["typeSound"].play();
   //現在打つべき文字の先頭からの文字数
   this.text = text;
 

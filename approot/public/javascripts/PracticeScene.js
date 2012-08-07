@@ -51,20 +51,20 @@ function PracticeScene(game,context,Images,name){
 
       /*----カウントダウンParts生成----*/
       this.scene.completedTextList = new Array();
-      var countDownCharacter = new CountDownCharacter(this.scene,"countDownCharacter","30pt monospace","#000000",1,game.canvas.width/2,game.canvas.height/2,100,100);
+      var pratcepracticeCountDownCharacter = new practiceCountDownCharacter(this.scene,"pratcepracticeCountDownCharacter","30pt monospace","#000000",1,game.canvas.width/2,game.canvas.height/2,100,100);
       //0:1位になった回数 1:現在の進捗(％) 2:スコア(進捗の合計)
       this.scene.membersScore = {};
-      scene.addParts(countDownCharacter);
+      scene.addParts(pratcepracticeCountDownCharacter);
       this.scene.onkeydown = function(e){
-        whatKey(this.game.scene.nowQuestion,this.game);
+        practiceWhatKey(this.game.scene.nowQuestion,this.game);
       }
     }
   }
 }
 
 
-function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.tmpY = y;
@@ -88,8 +88,8 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   }
 }
 
-function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+function practiceCompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.tmpY = y;
@@ -109,8 +109,8 @@ function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,heigh
   }
 }
 
-function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
   this.font = font;
@@ -127,35 +127,35 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
       if (0 >= countDown) {
         this.delete();
         this.scene.score = 0;
-        //        this.scene.winnerCount = 0;
+        this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
-        var myProgressBar = new ProgressBar(this.scene,"myProgressBar",1,20,500,680,50,this.scene.myId);
-        this.scene.bar = myProgressBar;
+        var mypracticeProgressBar = new practiceProgressBar(this.scene,"mypracticeProgressBar",1,20,500,680,50,this.scene.myId);
+        this.scene.bar = mypracticeProgressBar;
         //        this.scene.playerBars = [];
         progressBarCounter = 0;
         //       this.scene.members.forEach(function(id){
         //          if (this.scene.myId != id){
-        //            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
+        //            var playerpracticeProgressBar = new practiceProgressBar(this.scene,"PlayerpracticeProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
         //            progressBarCounter++;
-        //            this.scene.playerBars[id] = playerProgressBar;
-        //            this.scene.addParts(playerProgressBar);
+        //            this.scene.playerBars[id] = playerpracticeProgressBar;
+        //            this.scene.addParts(playerpracticeProgressBar);
         //          }
         //        },this);
-        var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
+        var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
-        this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
+        this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
 
-        this.scene.addParts(myProgressBar);
+        this.scene.addParts(mypracticeProgressBar);
         this.scene.addParts(questionCharacter);
-        this.scene.addParts(this.scene.completedCharacter);
+        this.scene.addParts(this.scene.practiceComplatedCharacter);
       }
     }  
     count--;
   }
 }
 
-function ProgressBar(scene,name,layer,x,y,width,height,id){
-  this.__proto__ = new Parts(scene,name,x,y,width,height);
+function practiceProgressBar(scene,name,layer,x,y,width,height,id){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.scene = scene;
   this.x = x;
   this.y = y;
@@ -195,7 +195,7 @@ function ProgressBar(scene,name,layer,x,y,width,height,id){
 }
 
 
-function progressUpdata(game,scene,percentage) {
+function practiceProgressUpdata(game,scene,percentage) {
   //  if(!scene.membersScore[id]){
   //    scene.membersScore[id] = [0,0,0];
   //  }
@@ -206,12 +206,12 @@ function progressUpdata(game,scene,percentage) {
     __charCounter__ = 0;
     game.scene.tabCount = 0;
     __input__ = new String();
-    game.scene.completedCharacter = new Array();
+    game.scene.practiceComplatedCharacter = new Array();
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
       console.log("終了");
-      game.resultData = {"score":game.scene.membersScore,"myId":game.scene.myId};
+      game.resultData = {};
       game.changeScene('practiceResultScene');
     }else{
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
@@ -246,7 +246,7 @@ function progressUpdata(game,scene,percentage) {
 
 
 //入力文字と出題文字が同じかを確かめるメソッド
-function whatKey(text,game){
+function practiceWhatKey(text,game){
   if(!game.scene.keyDownFlag){
     return;
   }
@@ -288,10 +288,10 @@ function whatKey(text,game){
       game.scene.myPercentage += 10;
       game.scene.bar.emitCounter += game.scene.nowQuestion.length/10;
       //TODO 
-      progressUpdata(game,game.scene,game.scene.myPercentage);
+      practiceProgressUpdata(game,game.scene,game.scene.myPercentage);
       game.scene.score += 10;
       if(game.scene.score == 100){
-        //  game.scene.winnerCount++;
+        game.scene.winnerCount++;
         game.scene.score = 0;
       }
     }
@@ -310,17 +310,19 @@ function whatKey(text,game){
 
 //入力済み文字列の描画
 function repaint(scene,game) {
-  var x = -scene.tabCount;
-  var textList = scene.textList;
-  scene.completedTextList.length = 0;
-  var tempText = scene.completedTextList;
-  for(i=0;i<textList.length;i++){
-    if(x + textList[i].length < __charCounter__){
-      x += textList[i].length;
-      tempText.push(textList[i]);
-    }else{
-      tempText.push(textList[i].slice(0,__charCounter__ - x));
-      break;
+  if(scene.completedTextList){
+    var x = -scene.tabCount;
+    var textList = scene.textList;
+    scene.completedTextList.length = 0;
+    var tempText = scene.completedTextList;
+    for(i=0;i<textList.length;i++){
+      if(x + textList[i].length < __charCounter__){
+        x += textList[i].length;
+        tempText.push(textList[i]);
+      }else{
+        tempText.push(textList[i].slice(0,__charCounter__ - x));
+        break;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-function TitleScene(game,context,Images,name){
+function TitleScene(game,context,resouces,name){
 
   //この関数はSceneを元にして出来ている(Sceneの継承)
   this.__proto__ = new Scene(game,context,name);
@@ -15,14 +15,14 @@ function TitleScene(game,context,Images,name){
     var ch = game.canvas.height;
     var cw = game.canvas.width;
 
-    var titleLogo = new StartTitle(this,"startTitleLogo",0,Images.titleLogo,(cw/2) - th,0,th,th);
-    var practiceImg = new StartButton(this,"practiceButton",1,Images.practice,
+    var titleLogo = new StartTitle(this,"startTitleLogo",0,resouces["titleLogo"],(cw/2) - th,0,th,th);
+    var practiceImg = new StartButton(this,"practiceButton",1,resouces["practice"],
         cw/2 + bw/2, ch/2 - bh, bw, bh);
-    var rankingImg = new StartButton(this, "rankingButton",1,Images.ranking, 
+    var rankingImg = new StartButton(this, "rankingButton",1,resouces["ranking"], 
         cw/2 + bw/2, ch/2 + bh, bw, bh);
-    var oppositionImg =  new StartButton(this, "oppositionButton",1,Images.opposition, 
+    var oppositionImg =  new StartButton(this, "oppositionButton",1,resouces["opposition"], 
         cw/2 - bw * 2, ch/2 - bh, bw, bh);
-    var questionsImg =  new StartButton(this, "questionsButton",1,Images.questions, 
+    var questionsImg =  new StartButton(this, "questionsButton",1,resouces["questions"], 
         cw/2 - bw * 2, ch/2 + bh, bw, bh);
 
     this.addParts(titleLogo);

@@ -95,7 +95,7 @@ function ResultButton(scene,name,layer,imgObj,x,y,width,height){
             case "postTwitterButton":
               window.open("https://twitter.com/intent/tweet?text=あなたの順位は"+this.scene.members.length+"人中"
                   +this.scene.myRank+"位で、スコアは"+this.scene.myScore
-                  +"点でした!  http://soda-riceamerican.dotcloud.com/", "_blank");
+                  +"点でした! "+location.href, "_blank");
               break;
           }
         }

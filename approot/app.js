@@ -2,7 +2,7 @@
 
   var express = require('express')
 , app = express.createServer()
-  app.listen(8080);    
+  app.listen(process.env['PORT_WWW'] || 8080);
   var io = require('socket.io').listen(app);
 
   app.configure(function(){

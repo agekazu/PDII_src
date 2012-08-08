@@ -4,5 +4,5 @@ nodejs:
   ports:
     www: http
   process: node app.js
-  approot: approot 
+  approot: hellonode
   node_version: v0.6.9

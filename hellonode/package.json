@@ -1,0 +1,9 @@
+{
+    "name": "naive",
+    "description": "A package using naive versioning",
+    "author": "A confused individual <iam@confused.com>",
+    "version": "0.0.1",
+    "dependencies": {
+        "redis": "0.6.7"
+    }
+}

@@ -32,6 +32,10 @@ Scene.prototype.delParts = function(parts){
   this.partsList.pop(parts);
 }
 
+Scene.prototype.clearParts = function(){
+  this.partsList.length = 0;
+}
+
 //loop(画面初期化処理)
 Scene.prototype.loop = function(){
   //画面全体を初期化
@@ -115,7 +119,7 @@ function Game(canvas,width,height){
   this.context = this.canvas.getContext('2d');
   this.scene;
   //各シーンが格納される連想配列の宣言
-  this.gameScenes = new Array();
+  this.gameScenes = [];
   this.timerId;
   this.offsetLeft = canvas.offsetLeft;
   this.offsetTop = canvas.offsetTop;

@@ -1,9 +1,10 @@
-function TitleScene(game,context,resouces,name){
+function TitleScene(game,context,name){
 
   //この関数はSceneを元にして出来ている(Sceneの継承)
   this.__proto__ = new Scene(game,context,name);
 
   this.init = function(){
+    this.clearParts();
     // titleImageWidth
     var tw = 600;
     // titleImageHeight
@@ -15,14 +16,14 @@ function TitleScene(game,context,resouces,name){
     var ch = game.canvas.height;
     var cw = game.canvas.width;
 
-    var titleLogo = new StartTitle(this,"startTitleLogo",0,resouces["titleLogo"],(cw/2) - th,0,th,th);
-    var practiceImg = new StartButton(this,"practiceButton",1,resouces["practice"],
+    var titleLogo = new StartTitle(this,"startTitleLogo",0,game.resouces["titleLogo"],(cw/2) - th,0,th,th);
+    var practiceImg = new StartButton(this,"practiceButton",1,game.resouces["practice"],
         cw/2 + bw/2, ch/2 - bh, bw, bh);
-    var rankingImg = new StartButton(this, "rankingButton",1,resouces["ranking"], 
+    var rankingImg = new StartButton(this, "rankingButton",1,game.resouces["ranking"], 
         cw/2 + bw/2, ch/2 + bh, bw, bh);
-    var oppositionImg =  new StartButton(this, "oppositionButton",1,resouces["opposition"], 
+    var oppositionImg =  new StartButton(this, "oppositionButton",1,game.resouces["opposition"], 
         cw/2 - bw * 2, ch/2 - bh, bw, bh);
-    var questionsImg =  new StartButton(this, "questionsButton",1,resouces["questions"], 
+    var questionsImg =  new StartButton(this, "questionsButton",1,game.resouces["questions"], 
         cw/2 - bw * 2, ch/2 + bh, bw, bh);
 
     this.addParts(titleLogo);

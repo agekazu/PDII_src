@@ -4,42 +4,47 @@ __tabSpace__ = 4;
 //入力済み文字列が格納される
 __input__ = new String();
 
-function PlayScene(game,context,Images,name){
+function PlayScene(game,context,name){
   //この関数はSceneを元にして出来ている(継承)
   this.__proto__ = new Scene(game,context,name);
   //初期化処理
   this.init = function(){
+    this.clearParts();
     var scene = this;
     /*----Session----*/
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect(location.href, {"force new connection":true});
+    this.socket = socket;
 
     socket.on('connect', function(){
       //getStandbyイベント発火
       socket.emit('getStandby');
       socket.on('getRoomKey', function(data){
-        //console.log("client: 受け取ったkey:" + data[0]);
-        //自分のIDをmyIdに格納
-        scene.myId = data[1];
-        createRoom(data[0]);
+        createRoom(data);
       });
     });
     //waitingを表示
-    var waitingCharacter = new PlayCharacter(this,"waitingCharacter","waiting...","30pt monospace","#000000",0,game.canvas.width-200,game.canvas.height-50,100,100);
+    var waitingCharacter = new WaitingCharacter(this,"waitingCharacter","waiting...","30pt monospace","#000000",0,game.canvas.width-300,game.canvas.height-50,100,100);
     this.addParts(waitingCharacter);
     function createRoom(key){
-      var room = io.connect('http://localhost:8080/' + key);
+      var room = io.connect(location.href + key, {"force new connection":true});
       room.on('connect', function(){
         room.on('gameStart', function(data){
-          gameStart(scene,data);
+          scene.myId = room.socket.sessionid;
+          gameStart(scene,data);;
         });  
         room.on('getProgress', function(data){
           progressUpdata(game,scene,data["id"],data["percentage"]);
+        });
+        room.on('addMember',function(data){
+          console.log(data);
+          scene.membersLength = data[0]+1;
+          scene.maxMembers = data[1];
         });
       });
       scene.room = room;
     }
 
-    function gameStart(scene,data) {
+    function gameStart(scene,data){
       waitingCharacter.delete();
       this.scene = scene;
       this.keyDownFlag = false;
@@ -47,12 +52,11 @@ function PlayScene(game,context,Images,name){
       this.scene.smallHash = keyCodeHashs[0];
       this.scene.capitalHash = keyCodeHashs[1];
       this.scene.members = data["members"];
-      //0:0:問題番号,1:言語名_問題の種類 1:問題文
+      //0:0:0:問題番号,0:0:1:言語名_問題の種類 0:1:1:問題文
       this.scene.questions = data["questions"];
       this.scene.questionNumber = 0;
       this.scene.nowQuestion = this.scene.questions[0][1];
-      console.log(this.scene.questions);
-      console.log(this.scene.questions[0][1]);
+      this.scene.nowQuestionInfo = this.scene.questions[0][0];
       this.scene.tabCount = 0;
 
       /*----カウントダウンParts生成----*/
@@ -68,6 +72,44 @@ function PlayScene(game,context,Images,name){
   }
 }
 
+function QuestionInfoCharacter(scene,name,text,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.x = x;
+  this.y = y;
+  this.font = font;
+  this.color = color;
+  this.text = text;
+
+  //loop関数を上書き
+  this.loop = function(){
+    this.context.fillStyle = this.color;
+    this.context.font = this.font;
+    this.context.fillText(this.text,this.x,this.y);
+    this.context.rect(20,50,680,450);
+    this.context.stroke();
+  }
+}
+
+
+function WaitingCharacter(scene,name,text,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.x = x;
+  this.y = y;
+  this.font = font;
+  this.color = color;
+  this.text = text;
+
+  //loop関数を上書き
+  this.loop = function(){
+    this.context.fillStyle = this.color;
+    this.context.font = this.font;
+    if(this.scene.membersLength){
+      this.context.fillText("("+this.scene.membersLength+"/"+this.scene.maxMembers+")"+this.text,this.x,this.y);
+    }else{
+      this.context.fillText(this.text,this.x,this.y);
+    }
+  }
+}
 
 function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
@@ -129,10 +171,13 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
     this.context.font = this.font;
     this.context.fillText(String(countDown),this.x,this.y);            
     if (0 >= count) {
+      if(countDown != 1){
+        //カウントダウン音
+        this.game.sounds["countdownSound"].play();
+      }
       countDown--;
       count = 30;
       if (0 >= countDown) {
-        this.game.sounds["changeSound"].play();
         this.delete();
         this.scene.score = 0;
         this.scene.winnerCount = 0;
@@ -141,9 +186,11 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.bar = myProgressBar;
         this.scene.playerBars = [];
         progressBarCounter = 0;
+        console.log(this.scene.members);
+        console.log(this.scene.myId);
         this.scene.members.forEach(function(id){
           if (this.scene.myId != id){
-            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
+            var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,750,50+(progressBarCounter*50+5),200,25,id);
             progressBarCounter++;
             this.scene.playerBars[id] = playerProgressBar;
             this.scene.addParts(playerProgressBar);
@@ -152,13 +199,16 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
         this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
+        this.scene.questionInfoCharacter = new QuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,20,20,100,100);
 
         this.scene.addParts(myProgressBar);
         this.scene.addParts(questionCharacter);
+        this.scene.addParts(this.scene.questionInfoCharacter);
         this.scene.addParts(this.scene.completedCharacter);
+        //画面遷移音
+        this.game.sounds["changeSound"].play();
       }
     }  
-    this.game.sounds["countdownSound"].play();
     count--;
   }
 }
@@ -203,7 +253,6 @@ function ProgressBar(scene,name,layer,x,y,width,height,id){
   }
 }
 
-
 function progressUpdata(game,scene,id,percentage) {
   if(!scene.membersScore[id]){
     scene.membersScore[id] = [0,0,0];
@@ -218,15 +267,17 @@ function progressUpdata(game,scene,id,percentage) {
     __input__ = new String();
     game.scene.completedCharacter = new Array();
     game.scene.questionNumber++;
+    game.scene.score = 0;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
       //終了音
       game.sounds["finishSound"].play();
       game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId};
+      console.log("Result画面へ遷移");
       game.changeScene('resultScene');
+      scene.socket.disconnect();
     }else{
-      //問題が遷移するとき
-      //遷移音
+      //問題遷移音
       game.sounds["changeSound"].play();
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
       game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
@@ -234,7 +285,9 @@ function progressUpdata(game,scene,id,percentage) {
       game.scene.textList = game.scene.textList.replace(/ /g,'␣');
       game.scene.textList = game.scene.textList.split('\n');
       game.scene.bar.emitCounter = game.scene.nowQuestion.length/10;
-      repaint(game.scene,game);
+      game.scene.nowQuestionInfo = game.scene.questions[game.scene.questionNumber][0];
+      game.scene.questionInfoCharacter.text = game.scene.nowQuestionInfo[0]+" "+game.scene.nowQuestionInfo[1];
+      repaint(game.scene,game)
     }
     scene.bar.volume = 0;
     scene.bar.increment = 0;
@@ -253,6 +306,8 @@ function progressUpdata(game,scene,id,percentage) {
     },this);
   }else{
     if(scene.myId != id){
+      console.log(id);
+      console.log(scene.playerBars);
       scene.playerBars[id].increment += 10;
     }
   }

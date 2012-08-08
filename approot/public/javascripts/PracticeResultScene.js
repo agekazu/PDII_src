@@ -1,9 +1,9 @@
-function PracticeResultScene(game,context,Images,name){
+function PracticeResultScene(game,context,name){
   //この関数はSceneを元にして出来ている(Sceneの継承)
   this.__proto__ = new Scene(game,context,name);
 
   this.init = function(){
-    console.log(this);
+    this.clearParts();
     // buttonWidth
     var bw = 200;
     // buttonHeight
@@ -11,9 +11,9 @@ function PracticeResultScene(game,context,Images,name){
     var ch = this.game.canvas.height;
     var cw = this.game.canvas.width;
     //ボタンの描画
-    var toStartButton = new PracticeResultButton(this,"toStartButton",1,Images["toStart"],
+    var toStartButton = new PracticeResultButton(this,"toStartButton",1,game.resouces["toStart"],
         cw/4 - bw/2 , ch-200, bw, bh); 
-    var postTwitterButton = new PracticeResultButton(this,"postTwitterButton",1,Images["postTwitter"],cw/2 - bw/2, ch-200, bw, bh); 
+    var postTwitterButton = new PracticeResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],cw/2 - bw/2, ch-200, bw, bh); 
 
     //タイトルの描画
     var resultCharacter = new PracticeResultCharacter(this,"resultTilteText","結果発表",

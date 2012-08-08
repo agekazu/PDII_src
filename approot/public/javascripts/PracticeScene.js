@@ -4,35 +4,24 @@ __tabSpace__ = 4;
 //入力済み文字列が格納される
 __input__ = new String();
 
-function PracticeScene(game,context,Images,name){
+function PracticeScene(game,context,name){
   //この関数はSceneを元にして出来ている(継承)
   this.__proto__ = new Scene(game,context,name);
   //初期化処理
   this.init = function(){
+    this.clearParts();
     var scene = this;
     /*----Session----*/
-    var socket = io.connect('http://localhost:8080');
+    var socket = io.connect(location.href, {"force new connection":true});
+    this.socket = socket;
 
     socket.on('connect', function(){
       //getStandbyイベント発火
       socket.emit('getPracticeQuestions');
       socket.on('getQuestion', function(questions){
-        //data=>2次元配列
         gameStart(scene,questions)
       });
     });
-
-//    function createRoom(key){
-//      var room = io.connect('http://localhost:8080/' + key);
-//      room.on('connect', function(){
-//        room.on('gameStart', function(data){
-//          gameStart(this,data);
-//        });  
-//        room.on('getProgress', function(data){
-//        });
-//      });
-//      scene.room = room;
-//    }
 
     function gameStart(scene,questions) {
       this.scene = scene;
@@ -122,6 +111,10 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
     this.context.font = this.font;
     this.context.fillText(String(countDown),this.x,this.y);            
     if (0 >= count) {
+      if(countDown != 1){
+        //カウントダウン音
+        this.game.sounds["countdownSound"].play();
+      }
       countDown--;
       count = 30;
       if (0 >= countDown) {
@@ -131,16 +124,7 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
         this.scene.keyDownFlag = true;
         var mypracticeProgressBar = new practiceProgressBar(this.scene,"mypracticeProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = mypracticeProgressBar;
-        //        this.scene.playerBars = [];
         progressBarCounter = 0;
-        //       this.scene.members.forEach(function(id){
-        //          if (this.scene.myId != id){
-        //            var playerpracticeProgressBar = new practiceProgressBar(this.scene,"PlayerpracticeProgressBar",1,600,50+(progressBarCounter*50+5),200,25,id);
-        //            progressBarCounter++;
-        //            this.scene.playerBars[id] = playerpracticeProgressBar;
-        //            this.scene.addParts(playerpracticeProgressBar);
-        //          }
-        //        },this);
         var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
         this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
@@ -148,9 +132,12 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
         this.scene.addParts(mypracticeProgressBar);
         this.scene.addParts(questionCharacter);
         this.scene.addParts(this.scene.practiceComplatedCharacter);
+        //画面遷移音
+        this.game.sounds["changeSound"].play();
       }
-    }  
-    count--;
+    }else{  
+      count--;
+    }
   }
 }
 
@@ -195,7 +182,7 @@ function practiceProgressBar(scene,name,layer,x,y,width,height,id){
 }
 
 
-function practiceProgressUpdata(game,scene,percentage) {
+function practiceProgressUpdata(game,scene,percentage){
   //  if(!scene.membersScore[id]){
   //    scene.membersScore[id] = [0,0,0];
   //  }
@@ -210,10 +197,15 @@ function practiceProgressUpdata(game,scene,percentage) {
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
-      console.log("終了");
+      //終了音
+      game.sounds["finishSound"].play();
+      game.scene.questionNumber = 0;
       game.resultData = {};
+      console.log("PracticeResult画面へ遷移");
       game.changeScene('practiceResultScene');
     }else{
+      //問題遷移音
+      game.sounds["changeSound"].play();
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
       game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
       game.scene.textList = game.scene.textList.replace(/\t/g,'»---');
@@ -250,6 +242,8 @@ function practiceWhatKey(text,game){
   if(!game.scene.keyDownFlag){
     return;
   }
+  //打鍵音
+  game.sounds["typeSound"].play();
   //現在打つべき文字の先頭からの文字数
   this.text = text;
 
@@ -287,7 +281,6 @@ function practiceWhatKey(text,game){
       game.scene.bar.increment += 10;
       game.scene.myPercentage += 10;
       game.scene.bar.emitCounter += game.scene.nowQuestion.length/10;
-      //TODO 
       practiceProgressUpdata(game,game.scene,game.scene.myPercentage);
       game.scene.score += 10;
       if(game.scene.score == 100){

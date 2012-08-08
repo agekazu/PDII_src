@@ -52,11 +52,11 @@ function init(){
     if(nextKey == 0){
       var date = new Date();
       nextKey = String(date.getTime());
-      createNameSpece(nextKey);
       roomList[nextKey] = {"members":new Array(), "questions":new Array()};
-      socket.emit("getRoomKey", [nextKey, socket.id]);
+      createNameSpece(nextKey);
+      socket.emit("getRoomKey", nextKey);
     }else{
-      socket.emit("getRoomKey", [nextKey, socket.id]);
+      socket.emit("getRoomKey", nextKey);
     }
   }
 
@@ -65,12 +65,15 @@ function init(){
       .of("/" + key)
       .on("connection",function(socket){
         console.log("server :nextKey=> " + key + "に" + socket.id +"というclientが接続しました");
+        room.emit("addMember", [roomList[nextKey]["members"].length, MAXMEMBERS]);
+
         //規定人数と等しいか？
         if(roomList[nextKey]["members"].length + 1 == MAXMEMBERS){
           roomList[nextKey]["members"].push(socket.id);
-
           roomList[nextKey]["questions"] = createQuestion();
           room.emit('gameStart', roomList[nextKey]);
+          room.startFlag = true;
+          nextKey = 0;
         }else if(roomList[nextKey]["members"].length + 1 >= MAXMEMBERS){
           // 規定人数以上だった場合 
         }else{
@@ -80,8 +83,18 @@ function init(){
           room.emit('getProgress', {"id":socket.id, "percentage":membersScore[1]});
           console.log("server:membersScore="+membersScore);
         });
+        socket.on('disconnect', function(){
+          if(!room.startFlag){
+            room.emit("addMember", [roomList[nextKey]["members"].length - 2, MAXMEMBERS]);
+            roomList[nextKey]["members"].pop(socket.id);
+            if(roomList[nextKey]["members"].length == 0){
+              nextKey = 0;
+            }
+          }
+        });
         /*clientとのやりとりはここから書いていく*/ 
       }); 
+    room.startFlag = false;
   }
 
   function createQuestion(){

@@ -78,20 +78,20 @@
         game.resouces = resouces;
         game.sounds = sounds;
 
-        var titleScene = new TitleScene(game,game.context,resouces,"titleScene");
+        var titleScene = new TitleScene(game,game.context,"titleScene");
         game.addScene(titleScene);
         game.setScene(titleScene);
 
-        var playScene = new PlayScene(game,game.context,resouces,"playScene");
+        var playScene = new PlayScene(game,game.context,"playScene");
         game.addScene(playScene);
 
-        var resultScene = new ResultScene(game,game.context,resouces,"resultScene");
+        var resultScene = new ResultScene(game,game.context,"resultScene");
         game.addScene(resultScene);
 
-        var practiceScene = new PracticeScene(game,game.context,resouces,"practiceScene");
+        var practiceScene = new PracticeScene(game,game.context,"practiceScene");
         game.addScene(practiceScene);
 
-        var practiceResultScene = new PracticeResultScene(game,game.context,resouces,"practiceResultScene");
+        var practiceResultScene = new PracticeResultScene(game,game.context,"practiceResultScene");
         game.addScene(practiceResultScene);
 
         var resouceCounter = 0;

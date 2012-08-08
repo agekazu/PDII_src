@@ -4,7 +4,6 @@
   , "private": true
   , "dependencies": {
       "express": "2.5.10"
-    , "connect" : "1.9.1" 
-    , "ejs": "0.7.2"
+    , "socket.io": "0.9.9" 
   }
 }

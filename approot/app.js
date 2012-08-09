@@ -68,20 +68,22 @@ function init(){
     var room = io
       .of("/" + key)
       .on("connection",function(socket){
-        console.log("server :nextKey=> " + key + "に" + socket.id +"というclientが接続しました");
-        room.emit("addMember", [roomList[nextKey]["members"].length, MAXMEMBERS]);
+        if(nextKey != 0){
+          console.log("server :nextKey=> " + key + "に" + socket.id +"というclientが接続しました");
+          room.emit("addMember", [roomList[nextKey]["members"].length, MAXMEMBERS]);
 
-        //規定人数と等しいか？
-        if(roomList[nextKey]["members"].length + 1 == MAXMEMBERS){
-          roomList[nextKey]["members"].push(socket.id);
-          roomList[nextKey]["questions"] = createQuestion();
-          room.emit('gameStart', roomList[nextKey]);
-          room.startFlag = true;
-          nextKey = 0;
-        }else if(roomList[nextKey]["members"].length + 1 >= MAXMEMBERS){
-          // 規定人数以上だった場合 
-        }else{
-          roomList[nextKey]["members"].push(socket.id);
+          //規定人数と等しいか？
+          if(roomList[nextKey]["members"].length + 1 == MAXMEMBERS){
+            roomList[nextKey]["members"].push(socket.id);
+            roomList[nextKey]["questions"] = createQuestion();
+            room.emit('gameStart', roomList[nextKey]);
+            room.startFlag = true;
+            nextKey = 0;
+          }else if(roomList[nextKey]["members"].length + 1 >= MAXMEMBERS){
+            // 規定人数以上だった場合 
+          }else{
+            roomList[nextKey]["members"].push(socket.id);
+          }
         }
         socket.on('sendProgress', function(membersScore){
           room.emit('getProgress', {"id":socket.id, "percentage":membersScore[1]});

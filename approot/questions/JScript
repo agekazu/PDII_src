@@ -1,0 +1,9 @@
+42	JScript_HelloWorld
+<?xml version="1.0"?>
+<job>
+  <script language="JScript">
+    <![CDATA[
+      WScript.Echo("Hello, World!");
+    ]]>
+  </script>
+</job>

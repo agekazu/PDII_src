@@ -1,0 +1,3199 @@
+<!--
+アルゴル60と680x0MPU,Human68k,HAS.xとビジュアルベーシック、BASIC、BrainCrash、Mind、MS-DOSパッチファイル(MS-DOS_PatchFile)、HSP、COBOL、Perl、PXem、sed、SKILL、Whitespace、WindowsScriptHostがデフォで開けない。
+1行目	言語名<タブ>実行内容
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>解説ページ</title>
+<!-- Twitter Bootstrapを表示するためのヘッダ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+	 <script type="text/javascript">
+
+	   var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-23019901-1']);
+		  _gaq.push(['_setDomainName', "bootswatch.com"]);
+  		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+
+	   (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	   })();
+
+	 </script>
+
+<!-- シンタックスハイライトでソースコードを表示するためのヘッダ -->
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<link type="text/css" rel="stylesheet" href="styles/shCore.css" />
+	<link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css" />
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCSharp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDelphi.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDiff.js"></script>
+	<script type="text/javascript" src="scripts/shBrushErlang.js"></script>
+	<script type="text/javascript" src="scripts/shBrushGroovy.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJava.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPerl.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPlain.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="scripts/shBrushRuby.js"></script>
+	<script type="text/javascript" src="scripts/shBrushScala.js"></script>
+	<script type="text/javascript" src="scripts/shBrushSql.js"></script>
+	<script type="text/javascript" src="scripts/shBrushVb.js"></script>
+	<script type="text/javascript" src="scripts/shBrushXml.js"></script>
+	<script type="text/javascript">
+    SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+    SyntaxHighlighter.all();
+	</script>
+
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="50">
+
+
+  <!-- Navbar ================================================== -->
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+		<a class="brand" href="#"><H1>解説ページ</H1></a>
+		<div class="nav-collapse" id="main-menu">
+		<ul class="nav">
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">解説一覧<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="questions1.html">解説ページ1</a></li>
+                <li><a href="questions2.html">解説ページ2</a></li>
+                <li><a href="questions3.html">解説ページ3</a></li>
+                <li><a href="questions4.html">解説ページ4</a></li>
+                <li><a href="questions5.html">解説ページ5</a></li>
+                <li><a href="questions6.html">解説ページ6</a></li>
+                <li><a href="questions7.html">解説ページ7</a></li>
+                <li><a href="questions8.html">解説ページ8</a></li>
+                <li><a href="questions9.html">解説ページ9</a></li>
+                <li><a href="questions10.html">解説ページ10</a></li>
+              </ul>
+            </li>
+            <li class="divider-vertical"></li>
+          <li><a href="javascript:history.back();">戻る</a></li>
+          <li class="divider-vertical"></li>
+          <li><a href="javascript:history.forward();">進む</a></li>
+          </ul>
+		</div><!-- /.nav-collapse -->
+     </div>
+   </div><!-- /navbar-inner -->
+ </div><!-- /navbar -->
+
+    <div class="container">
+
+
+<!-- メニュー画面 ================================================== -->
+<header class="jumbotron subhead" id="overview">
+<br><br><br><br>
+  <h1>解説</h1>
+  <p class="lead">このページはソースコードの解説ページです。</p>
+  <div class="subnav">
+    <ul class="nav nav-pills">
+      <li><a href="#001">001	: 680x0MPU,Human68k,HAS.xのHelloWorld</a></li>
+      <li><a href="#002">002	: ABAPのHelloWorld</a></li>
+      <li><a href="#003">003	: ActiveBasicのHelloWorld</a></li>
+      <li><a href="#004">004	: AdaのHelloWorld</a></li>
+      <li><a href="#005">005	: ALGOL60のHelloWorld</a></li>
+      <li><a href="#006">006	: APLのHelloWorld</a></li>
+      <li><a href="#007">007	: AWKのHelloWorld</a></li>
+      <li><a href="#008">008	: BのHelloWorld</a></li>
+      <li><a href="#009">009	: BASICのHelloWorld</a></li>
+      <li><a href="#010">010	: BCPLのHelloWorld</a></li>
+      <li><a href="#011">011	: BefungeのHelloWorld</a></li>
+      <li><a href="#012">012	: BooのHelloWorld</a></li>
+      <li><a href="#013">013	: BrainCrashのHelloWorld</a></li>
+      <li><a href="#014">014	: BrainfuckのHelloWorld</a></li>
+      <li><a href="#015">015	: CのHelloWorld</a></li>
+      <li><a href="#016">016	: C#のHelloWorld</a></li>
+      <li><a href="#017">017	: C++のHelloWorld</a></li>
+      <li><a href="#018">018	: CASLのHelloWorld</a></li>
+      <li><a href="#019">019	: CASLIIのHelloWorld</a></li>
+      <li><a href="#020">020	: CeylonのHelloWorld</a></li>
+      <li><a href="#021">021	: ClojureのHelloWorld</a></li>
+      <li><a href="#022">022	: COBOLのHelloWorld</a></li>
+      <li><a href="#023">023	: Common LispのHelloWorld</a></li>
+      <li><a href="#024">024	: ConcurrentCleanのHelloWorld</a></li>
+      <li><a href="#025">025	: DのHelloWorld</a></li>
+      <li><a href="#026">026	: DartのHelloWorld</a></li>
+      <li><a href="#027">027	: EiffelのHelloWorld</a></li>
+      <li><a href="#028">028	: ErlangのHelloWorld</a></li>
+      <li><a href="#029">029	: FantomのHelloWorld</a></li>
+      <li><a href="#030">030	: ForthのHelloWorld</a></li>
+      <li><a href="#031">031	: FORTRANのHelloWorld</a></li>
+      <li><a href="#032">032	: GoのHelloWorld</a></li>
+      <li><a href="#033">033	: GroovyのHelloWorld</a></li>
+      <li><a href="#034">034	: HaskellのHelloWorld</a></li>
+      <li><a href="#035">035	: HMMMML2のHelloWorld</a></li>
+      <li><a href="#036">036	: HQ9+のHelloWorld</a></li>
+      <li><a href="#037">037	: HSPのHelloWorld</a></li>
+      <li><a href="#038">038	: IconのHelloWorld</a></li>
+      <li><a href="#039">039	: INTERCALのHelloWorld</a></li>
+      <li><a href="#040">040	: IoのHelloWorld</a></li>
+      <li><a href="#041">041	: JavaのHelloWorld</a></li>
+      <li><a href="#042">042	: JScriptのHelloWorld</a></li>
+      <li><a href="#043">043	: KEMURIのHelloWorld</a></li>
+      <li><a href="#044">044	: KotlinのHelloWorld</a></li>
+      <li><a href="#045">045	: LazyKのHelloWorld</a></li>
+      <li><a href="#046">046	: LISPのHelloWorld</a></li>
+      <li><a href="#047">047	: LOGOのHelloWorld</a></li>
+      <li><a href="#048">048	: LSLのHelloWorld</a></li>
+      <li><a href="#049">049	: LuaのHelloWorld</a></li>
+      <li><a href="#050">050	: MalbolgeのHelloWorld</a></li>
+      <li><a href="#051">051	: ManaのHelloWorld</a></li>
+      <li><a href="#052">052	: MathematicaのHelloWorld</a></li>
+      <li><a href="#053">053	: MATLABのHelloWorld</a></li>
+      <li><a href="#054">054	: MindのHelloWorld</a></li>
+      <li><a href="#055">055	: Modula-2のHelloWorld</a></li>
+      <li><a href="#056">056	: MONAmonaのHelloWorld</a></li>
+      <li><a href="#057">057	: MopsのHelloWorld</a></li>
+      <li><a href="#058">058	: MovaのHelloWorld</a></li>
+      <li><a href="#059">059	: MS-DOSバッチファイルのHelloWorld</a></li>
+      <li><a href="#060">060	: MSILのHelloWorld</a></li>
+      <li><a href="#061">061	: OCamlのHelloWorld</a></li>
+      <li><a href="#062">062	: Ook!のHelloWorld</a></li>
+      <li><a href="#063">063	: PascalのHelloWorld</a></li>
+      <li><a href="#064">064	: PerlのHelloWorld</a></li>
+      <li><a href="#065">065	: PerlScriptのHelloWorld</a></li>
+      <li><a href="#066">066	: PL/IのHelloWorld</a></li>
+      <li><a href="#067">067	: PowerPCCPU,MacOS,FantasmのHelloWorld</a></li>
+      <li><a href="#068">068	: PrologのHelloWorld</a></li>
+      <li><a href="#069">069	: PxemのHelloWorld</a></li>
+      <li><a href="#070">070	: PythonのHelloWorld</a></li>
+      <li><a href="#071">071	: QのHelloWorld</a></li>
+      <li><a href="#072">072	: REXXのHelloWorld</a></li>
+      <li><a href="#073">073	: RubyのHelloWorld</a></li>
+      <li><a href="#074">074	: ScalaのHelloWorld</a></li>
+      <li><a href="#075">075	: SchemeのHelloWorld</a></li>
+      <li><a href="#076">076	: sedのHelloWorld</a></li>
+      <li><a href="#077">077	: SKILLのHelloWorld</a></li>
+      <li><a href="#078">078	: SmalltalkのHelloWorld</a></li>
+      <li><a href="#079">079	: SNOBOLのHelloWorld</a></li>
+      <li><a href="#080">080	: SQLのHelloWorld</a></li>
+      <li><a href="#081">081	: SquirrelのHelloWorld</a></li>
+      <li><a href="#082">082	: StandardMLのHelloWorld</a></li>
+      <li><a href="#083">083	: TclのHelloWorld</a></li>
+      <li><a href="#084">084	: TenemsのHelloWorld</a></li>
+      <li><a href="#085">085	: UNIXシェルスクリプトのHelloWorld</a></li>
+      <li><a href="#086">086	: UnlambdaのHelloWorld</a></li>
+      <li><a href="#087">087	: VBScriptのHelloWorld</a></li>
+      <li><a href="#088">088	: VisualBasic.NETのHelloWorld</a></li>
+      <li><a href="#089">089	: WhitespaceのHelloWorld</a></li>
+      <li><a href="#090">090	: WindowsScriptHostのHelloWorld</a></li>
+      <li><a href="#091">091	: x86CPU,Linux,NASMのHelloWorld</a></li>
+      <li><a href="#092">092	: x86CPU,MS-DOS,NASMのHelloWorld</a></li>
+    </ul>
+  </div>
+</header>
+
+
+
+
+<!-- ================================================== -->
+<section id="001">
+  <div class="page-header">
+    <h1>001	680x0 MPU, Human68k, HAS.xのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br>
+アセンブリ言語 680x0 MPU, Human68k, HAS.x を使用している。<br><br>
+        <h6>
+<!--
+        <a HREF="http://ja.wikipedia.org/wiki/C%E8%A8%80%E8%AA%9E" style="text-decoration:none" target="_blank">C - Wikipedia</a></br>
+-->
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ pea.l (mes,pc)
+ dc.w $ff09        ; DOS _PRINT
+ addq.l #4,sp
+ dc.w $ff00        ; DOS _EXIT
+
+mes: dc.b 'Hello, world!',0
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="002">
+  <div class="page-header">
+    <h1>002	ABAPのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/ABAP" target="_blank">ABAP - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ WRITE / 'Hello, world!'.
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="003">
+  <div class="page-header">
+    <h1>003	ActiveBasicのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/ActiveBasic" style="text-decoration:none" target="_blank">ActiveBasic - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ #prompt
+ Print "Hello, world"
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="004">
+  <div class="page-header">
+    <h1>004	AdaのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Ada" style="text-decoration:none" target="_blank">Ada - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+with Ada.Text_Io; use Ada.Text_Io;
+procedure Hello is
+begin
+ Put_Line ("Hello, world!");
+end Hello;
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="005">
+  <div class="page-header">
+    <h1>005	ALGOL60のHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/ALGOL" style="text-decoration:none" target="_blank">ALGOL60 - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+'''procedure''' hello (channel) ;
+   '''value''' channel ;
+   '''integer''' channel ;
+   '''begin'''
+   outstring (channel, 'Hello, world!')
+   '''end''' hello ;
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="006">
+  <div class="page-header">
+    <h1>006	APLのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/APL" style="text-decoration:none" target="_blank">APL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ 'Hello, world!'
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="007">
+  <div class="page-header">
+    <h1>007	AWKのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/AWK" target="_blank">AWK - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ BEGIN { print "Hello, world!" }
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="008">
+  <div class="page-header">
+    <h1>008	BのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/B%E8%A8%80%E8%AA%9E" style="text-decoration:none" target="_blank">B - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ main( ) {
+ putchar('Hello, world!*n');
+ }
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="009">
+  <div class="page-header">
+    <h1>009	BASICのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/BASIC" style="text-decoration:none" target="_blank">BASIC - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ print "Hello, world!"
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="010">
+  <div class="page-header">
+    <h1>010	BCPLのHelloWorld</h1>
+  </div>
+
+  <!-- Headings & Paragraph Copy -->
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/BCPL" style="text-decoration:none" target="_blank">BCPL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ GET "LIBHDR"
+ 
+ LET START () BE
+ $(
+ WRITES ("Hello, world!*N")
+ $)
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="011">
+  <div class="page-header">
+    <h1>011	BefungeのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Befunge" style="text-decoration:none" target="_blank">Befunge - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ "!dlrow olleH">v
+               ,:
+               ^_@
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="012">
+  <div class="page-header">
+    <h1>012	BooのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Boo_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" target="_blank">Boo - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+print "Hello, World!"
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="013">
+  <div class="page-header">
+    <h1>013	BrainCrashのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+<!--
+        <a HREF="http://ja.wikipedia.org/wiki/ActiveBasic" style="text-decoration:none" target="_blank">BrainCrash - Wikipedia</a></br>
+-->
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+0バイトのソースコードは、Hello, World!と表示する。
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="014">
+  <div class="page-header">
+    <h1>014	BrainfuckのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Brainfuck" style="text-decoration:none" target="_blank">Brainfuck - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.
+ ------------.<++++++++.--------.+++.------.--------.>+.
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="015">
+  <div class="page-header">
+    <h1>015	CのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/C%E8%A8%80%E8%AA%9E" style="text-decoration:none" target="_blank">C - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main (int argc, char **argv) 
+  {
+  puts ("Hello, World!") ;
+  return EXIT_SUCCESS ;
+  }
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="016">
+  <div class="page-header">
+    <h1>016	C#のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/C_Sharp" style="text-decoration:none" target="_blank">C# - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+class HelloWorldApp 
+{
+ static void Main() 
+ {
+  System.Console.WriteLine("Hello, world!");
+ }
+}
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="017">
+  <div class="page-header">
+    <h1>017	C++のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/C%2B%2B" target="_blank">C++ - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+#include <iostream>
+
+int main()
+{
+	std::cout << "Hello World!＼n";
+	return 0;
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="018">
+  <div class="page-header">
+    <h1>018	CASLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/CASL" style="text-decoration:none" target="_blank">CASL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+     OUT TEXT,LEN
+
+
+LEN  DC  12
+TEXT DC  'HELLO
+          world!'
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="019">
+  <div class="page-header">
+    <h1>019	CASLIIのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/CASL" style="text-decoration:none" target="_blank">CASLII - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+;Output "Hello, World!" program
+MAIN     START
+         OUT    BUF,LEN
+         RET
+BUF      DC     'Hello, World!'
+LEN      DC     13
+         END
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="020">
+  <div class="page-header">
+    <h1>020	CeylonのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Ceylon" style="text-decoration:none" target="_blank">Ceylon - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+void hello() {
+   writeLine("Hello World!");
+}
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="021">
+  <div class="page-header">
+    <h1>021	ClojureのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Clojure" style="text-decoration:none" target="_blank">Clojure - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+(println "Hello, world!")
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="022">
+  <div class="page-header">
+    <h1>022	COBOLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/COBOL" target="_blank">COBOL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ IDENTIFICATION DIVISION.
+ PROGRAM-ID. HELLO-WORLD.
+ PROCEDURE DIVISION.
+ DISPLAY "Hello, world!".
+ STOP RUN.
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="023">
+  <div class="page-header">
+    <h1>023	Common LispのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Common_Lisp" style="text-decoration:none" target="_blank">Common Lisp - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+"Hello, world!"
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="024">
+  <div class="page-header">
+    <h1>024	Concurrent CleanのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Concurrent_Clean" style="text-decoration:none" target="_blank">Concurrent Clean - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ module HelloWorld
+ Start = "Hello, world!"
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="025">
+  <div class="page-header">
+    <h1>025	DのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/D%E8%A8%80%E8%AA%9E" style="text-decoration:none" target="_blank">D - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+private import std.stdio;
+ 
+void main()
+{
+    writeln("Hello, world!");
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="026">
+  <div class="page-header">
+    <h1>026	DartのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Dart" style="text-decoration:none" target="_blank">Dart - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ main() {
+   print('Hello, Dart!');
+ }
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="027">
+  <div class="page-header">
+    <h1>027	EiffelのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Eiffel" target="_blank">Eiffel - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+class HELLO_WORLD
+
+creation
+ make
+feature
+ make is
+ local
+ io:BASIC_IO
+ do
+ !!io
+ io.put_string("%N Hello, world!")
+ end -- make
+end -- class HELLO_WORLD
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="028">
+  <div class="page-header">
+    <h1>028	ErlangのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Erlang" style="text-decoration:none" target="_blank">Erlang - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: erlang;">
+ -module(hello).
+ -export([hello_world/0]).
+ 
+ hello_world() -> io:fwrite("Hello, World!¥n").
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="029">
+  <div class="page-header">
+    <h1>029	FantomのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Fantom_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" style="text-decoration:none" target="_blank">Fantom - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+class Hello
+  {
+  static Void main() { echo("Hello, World!") }
+  }
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="030">
+  <div class="page-header">
+    <h1>030	ForthのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/FORTH" style="text-decoration:none" target="_blank">Forth - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+Forth	HelloWorld
+ .( Hello, world!) CR
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="031">
+  <div class="page-header">
+    <h1>031	FORTRANのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/FORTRAN" style="text-decoration:none" target="_blank">FORTRAN - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+      WRITE(*,10)
+   10 FORMAT('Hello, World!')
+      STOP
+      END
+
+ program main
+   print *,"Hello, World!"
+ end program main
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="032">
+  <div class="page-header">
+    <h1>032	GoのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Go_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" target="_blank">Go - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ package main
+ 
+ import "fmt"
+ 
+ func main() {
+ 	fmt.Print("Hello, World!¥n")
+ }
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="033">
+  <div class="page-header">
+    <h1>033	GroovyのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Groovy" style="text-decoration:none" target="_blank">Groovy - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: groovy;">
+ print 'Hello, World!'
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="034">
+  <div class="page-header">
+    <h1>034	HaskellのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Haskell" style="text-decoration:none" target="_blank">Haskell - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ main = interact $ const "Hello,World!\n"
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="035">
+  <div class="page-header">
+    <h1>035	HMMMML2のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ ptint "Hello World"
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="036">
+  <div class="page-header">
+    <h1>036	HQ9+のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/HQ9%2B" style="text-decoration:none" target="_blank">HQ9+ - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ H
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="037">
+  <div class="page-header">
+    <h1>037	HSPのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Hot_Soup_Processor" target="_blank">HSP - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ print "Hello World"
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="038">
+  <div class="page-header">
+    <h1>038	IconのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Icon%E8%A8%80%E8%AA%9E" style="text-decoration:none" target="_blank">Icon - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ procedure main (args)
+ write ("Hello, World!")
+ end
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="039">
+  <div class="page-header">
+    <h1>039	INTERCALのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/INTERCAL" style="text-decoration:none" target="_blank">INTERCAL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+    PLEASE DO ,1 <- #13
+    DO ,1 SUB #1 <- #238
+    DO ,1 SUB #2 <- #112
+    DO ,1 SUB #3 <- #112
+    DO ,1 SUB #4 <- #0
+    DO ,1 SUB #5 <- #64
+    DO ,1 SUB #6 <- #238
+    DO ,1 SUB #7 <- #26
+    DO ,1 SUB #8 <- #248
+    DO ,1 SUB #9 <- #168
+    DO ,1 SUB #10 <- #24
+    DO ,1 SUB #11 <- #16
+    DO ,1 SUB #12 <- #158
+    DO ,1 SUB #13 <- #52
+    PLEASE READ OUT ,1
+    PLEASE GIVE UP
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="040">
+  <div class="page-header">
+    <h1>040	loのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Io_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" style="text-decoration:none" target="_blank">lo - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ "Hello, world!" print
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="041">
+  <div class="page-header">
+    <h1>041	JavaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Java" style="text-decoration:none" target="_blank">Java - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:java" type="syntaxhighlighter"><![CDATA[
+public class Hello{
+    public static void main(String[] args){
+        System.out.println("Hello, world!");
+    }
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="042">
+  <div class="page-header">
+    <h1>042	JScriptのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/JScript" target="_blank">JScript - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: js;">
+<?xml version="1.0"?>
+<job>
+  <script language="JScript">
+    <![CDATA[
+      WScript.Echo("Hello, World!");
+    ]]>
+  </script>
+</job>
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="043">
+  <div class="page-header">
+    <h1>043	KEMURIのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/KEMURI_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" style="text-decoration:none" target="_blank">KEMURI - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+` |
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="044">
+  <div class="page-header">
+    <h1>044	KotlinのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Kotlin" style="text-decoration:none" target="_blank">Kotlin - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ fun main (args : Array<String>) {println ("Hello, world!")}
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="045">
+  <div class="page-header">
+    <h1>045	LazyKのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Lazy_K" style="text-decoration:none" target="_blank">LazyK - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ `k``s``si`k``s`k```sii``s``s`kski``s``s`ksk``s``s`ksk```s``siii``s``s`kski`k``
+ s``si`k``s``s`ksk```s``s`kski``s`k``s``s`kski``s``s`ksk```sii``s``s`kski`k``s`
+ `si`k``s`k```sii``s``s`kski```sii``s``s`ksk``s``s`kski`k``s``si`k``s`k```sii``
+ s``s`kski```sii``s``s`ksk``s``s`kski`k``s``si`k``s``s`ksk``s`k``s``s`kski``s``
+ s`ksk``s`k``s``s`kski```sii``s``s`ksk``s``s`kski`k``s``si`k````s``s`ksk```s``s
+ iii``s``s`kski`s``s`ksk```sii``s``s`ksk``s``s`kski`k``s``si`k``s`k``s``s`kski`
+ ``s``siii``s``s`kski`k``s``si`k``s`k``s``s`ksk``s`k``s``s`kski``s``s`ksk``s``s
+ `kski``s``s`ksk```s``siii``s``s`kski`k``s``si`k``s``s`ksk``s`k``s``s`kski``s``
+ s`ksk``s`k``s``s`kski```sii``s``s`ksk``s``s`kski`k``s``si`k``s`k``s``s`kski``s
+ ``s`ksk``s`k``s``s`kski``s``s`ksk```sii``s``s`ksk``s``s`kski`k``s``si`k``s`k``
+ `sii``s``s`kski```sii``s``s`ksk``s``s`kski`k``s``si`k```s``s`kski``s`k``s``s`k
+ ski``s``s`ksk```sii``s``s`kski`k``s``si`k``s``s`ksk``s`k``s``s`kski```s``siii`
+ `s``s`kski`k``s``si`k``s`k``s``s`kski``s``s`ksk```sii``s``s`kski`k``s``si`k```
+ sii```sii``s``s`kski`k```sii```sii``s``s`kski
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="046">
+  <div class="page-header">
+    <h1>046	LISPのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/LISP" style="text-decoration:none" target="_blank">LISP - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ (format t "Hello, World¥n")
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="047">
+  <div class="page-header">
+    <h1>047	LOGOのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/LOGO" target="_blank">LOGO - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ TO HELLO
+ PRINT [Hello, world!]
+ END
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="048">
+  <div class="page-header">
+    <h1>048	LSLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Linden_Scripting_Language" style="text-decoration:none" target="_blank">LSL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ default
+ {
+  state_entry()
+  {
+   llSay(0, "Hello, World!");
+  }
+ }
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="049">
+  <div class="page-header">
+    <h1>049	LuaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Lua" style="text-decoration:none" target="_blank">Lua - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ print "Hello, world!"
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="050">
+  <div class="page-header">
+    <h1>050	MalbolgeのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Malbolge" style="text-decoration:none" target="_blank">Malbolge - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ (=<`@?>‾6Z:z2VU/.R?10/.-,+*)('&%$#"!‾}|{z]Kwvut3EqpiAmlONi
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="051">
+  <div class="page-header">
+    <h1>051	ManaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Mana_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" style="text-decoration:none" target="_blank">Mana - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ action HelloWorldActor::init
+ {
+  print("Hello, world!¥n");
+ }
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="052">
+  <div class="page-header">
+    <h1>052	MathematicaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Mathematica" target="_blank">Mathematica - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ Print["Hello, world"]
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="053">
+  <div class="page-header">
+    <h1>053	MATLABのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/MATLAB" style="text-decoration:none" target="_blank">MATLAB - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ printf ('Hello, world!¥n')
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="054">
+  <div class="page-header">
+    <h1>054 MindのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Mind" style="text-decoration:none" target="_blank">Mind - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ 挨拶とは、
+ 「ようこそ、世界へ！」と表示して、改行すること。
+ 
+ メインとは、
+ 挨拶すること。
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="055">
+  <div class="page-header">
+    <h1>055	Modula-2のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Modula-2" style="text-decoration:none" target="_blank">Modula-2 - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ MODULE HellowWorld;
+ FROM InOut IMPORT WriteString, WriteLn;
+ BEGIN
+ WriteString('Hello, world!');
+ WriteLn
+ END HellowWorld.
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="056">
+  <div class="page-header">
+    <h1>056	MONAmonaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/MONAmona#.E6.B4.BE.E7.94.9F.E8.A8.80.E8.AA.9E" style="text-decoration:none" target="_blank">MONAmona - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ NNNNNNNNNNnMNNNNNNNMNNNNNNNNNNMNNNMNOOOOAaMNNoMNoNNNNNNNoo
+ NNNoMNNoOONNNNNNNNNNNNNNNoMoNNNoAAAAAAoAAAAAAAAoMNoMo
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="057">
+  <div class="page-header">
+    <h1>057	MopsのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Mops" target="_blank">Mops - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ : hello ( -- ) ." Hello Forth-World!" cr ;
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="058">
+  <div class="page-header">
+    <h1>058	MovaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Mova" style="text-decoration:none" target="_blank">Mova - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ print "Hello, world!";
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="059">
+  <div class="page-header">
+    <h1>059	MS-DOSバッチファイルのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/MS-DOS%E3%83%90%E3%83%83%E3%83%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB" style="text-decoration:none" target="_blank">MS-DOSバッチファイル - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+@ECHO OFF
+ECHO Hello, world!
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="060">
+  <div class="page-header">
+    <h1>060	MSILのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/MSIL" style="text-decoration:none" target="_blank">MSIL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+.assembly helloworld{}
+.method public static void hoge() cil managed
+{
+	.entrypoint
+	ldstr      "Hello, World"
+	call       void [mscorlib]System.Console::WriteLine(string)
+	ret
+}
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="061">
+  <div class="page-header">
+    <h1>061	OCamlのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/OCaml" style="text-decoration:none" target="_blank">OCaml - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ print_endline "Hello, world!";;
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="062">
+  <div class="page-header">
+    <h1>062	Ook!のHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Ook!" target="_blank">Ook! - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook. Ook?
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook.
+ Ook? Ook. Ook? Ook. Ook? Ook. Ook? Ook. Ook! Ook! Ook? Ook!
+ Ook. Ook? Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook? Ook. Ook.
+ Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook. Ook! Ook. Ook! Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook! Ook. Ook. Ook? Ook. Ook. Ook. Ook. Ook! Ook.
+ Ook? Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.
+ Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook.
+ Ook. Ook? Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook.
+ Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!
+ Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!
+ Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook? Ook. Ook.
+ Ook! Ook. Ook. Ook? Ook! Ook.
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="063">
+  <div class="page-header">
+    <h1>063	PascalのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Pascal" style="text-decoration:none" target="_blank">Pascal - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+program Hello(output);
+begin
+ writeln('Hello, world!')
+end.
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="064">
+  <div class="page-header">
+    <h1>064	PerlのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Perl" style="text-decoration:none" target="_blank">Perl - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: perl;">
+print "Hello, world!\n";
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="065">
+  <div class="page-header">
+    <h1>065	PerlScriptのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/PerlScript" style="text-decoration:none" target="_blank">PerlScript - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: perl;">
+<?xml version="1.0"?>
+<job>
+  <script language="PerlScript">
+    <![CDATA[
+      &WScript->Echo("Hello, World!");
+    ]]>
+  </script>
+</job>
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="066">
+  <div class="page-header">
+    <h1>066	PL/IのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/PL/I" style="text-decoration:none" target="_blank">PL/I - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ Test: procedure options(main);
+ put skip list('Hello, world!');
+ end Test;
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="067">
+  <div class="page-header">
+    <h1>067	PowerPCCPU,MacOS,FantasmのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+        lwz r3,hello(rtoc)
+        Xcall DrawString
+        blr
+hello: pstring "Hello, world!"
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="068">
+  <div class="page-header">
+    <h1>068	PrologのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Prolog" style="text-decoration:none" target="_blank">Prolog - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ goal :-
+   write('hello, world!¥n').
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="069">
+  <div class="page-header">
+    <h1>069	PxemのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Pxem" style="text-decoration:none" target="_blank">Pxem - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+''Hello, world!.pxe''
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="070">
+  <div class="page-header">
+    <h1>070	PythonのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Python" style="text-decoration:none" target="_blank">Python - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: python;">
+print "Hello, world!"
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="071">
+  <div class="page-header">
+    <h1>071	QのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Q" style="text-decoration:none" target="_blank">Q - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ hello = writes "Hello, world!¥n";
+ hello;
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="072">
+  <div class="page-header">
+    <h1>072	REXXのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/REXX" target="_blank">REXX - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ /* A comment line at topmost of the script is not a part of program,
+ but telling the shell that this is a REXX program, not a batch. */
+ say "Hello, world!"
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="073">
+  <div class="page-header">
+    <h1>073	RubyのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Ruby" style="text-decoration:none" target="_blank">Ruby - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: rails;">
+puts "Hello, world!"
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="074">
+  <div class="page-header">
+    <h1>074	ScalaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Scala" style="text-decoration:none" target="_blank">Scala - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: scala;">
+ object HelloWorld extends Application {
+   println("Hello, world!")
+ }
+</pre>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="075">
+  <div class="page-header">
+    <h1>075	SchemeのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Scheme" style="text-decoration:none" target="_blank">Scheme - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+(display "Hello, world!")
+(newline)
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="076">
+  <div class="page-header">
+    <h1>076	sedのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Sed_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)" style="text-decoration:none" target="_blank">sed - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ #n
+ 1i\
+ hello, world!
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="077">
+  <div class="page-header">
+    <h1>077	SKILLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/SKILL_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E)" target="_blank">SKILL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+println("Hello, world!")
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="078">
+  <div class="page-header">
+    <h1>078	SmalltalkのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Smalltalk" style="text-decoration:none" target="_blank">Smalltalk - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+Transcript show: 'Hello, world!'
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="079">
+  <div class="page-header">
+    <h1>079	SNOBOLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/SNOBOL" style="text-decoration:none" target="_blank">SNOBOL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ OUTPUT = "Hello, world!"
+ END
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="080">
+  <div class="page-header">
+    <h1>080	SQLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/SQL" style="text-decoration:none" target="_blank">SQL - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: sql;">
+select 'hello world' from dual;
+select 'hello world';
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="081">
+  <div class="page-header">
+    <h1>081	SquirrelのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Squirrel" style="text-decoration:none" target="_blank">Squirrel - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+ print("Hello, world!")
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="082">
+  <div class="page-header">
+    <h1>082	StandardMLのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EML" target="_blank">StandardML - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ print "Hello,world!";
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="083">
+  <div class="page-header">
+    <h1>083	TclのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Tcl/Tk" style="text-decoration:none" target="_blank">Tcl - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+puts "Hello, world!"
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="084">
+  <div class="page-header">
+    <h1>084	TenemsのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Tenems" style="text-decoration:none" target="_blank">Tenems - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+ <hello> extends object {
+ <Main> static public routine int () {
+ Console.WriteLine("Hello, world!");
+ return 0;
+ }
+ }
+ ]]></script>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="085">
+  <div class="page-header">
+    <h1>085	UNIXシェルスクリプトのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88#.E3.82.B7.E3.82.A7.E3.83.AB.E3.82.B9.E3.82.AF.E3.83.AA.E3.83.97.E3.83.88" style="text-decoration:none" target="_blank">UNIXシェルスクリプト - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+echo 'Hello, world!'
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="086">
+  <div class="page-header">
+    <h1>086	UnlambdaのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Unlambda" style="text-decoration:none" target="_blank">Unlambda - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+ `r`````````````.H.e.l.l.o.,. .w.o.r.l.d.!.a
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="087">
+  <div class="page-header">
+    <h1>087	VBScriptのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/VBScript" target="_blank">VBScript - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: vb;">
+<?xml version="1.0"?>
+<job>
+  <script language="VBScript">
+    <![CDATA[
+      WScript.Echo("Hello, World!")
+    ]]>
+  </script>
+</job>
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="088">
+  <div class="page-header">
+    <h1>088	VisualBasic.NETのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Microsoft_Visual_Basic_.NET" style="text-decoration:none" target="_blank">VisualBasic.NET - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: vb;">
+Public Class HelloWorldApp
+ Shared Sub Main()
+ System.Console.WriteLine("Hello, World!")
+ End Sub
+End Class
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="089">
+  <div class="page-header">
+    <h1>089	WhitespaceのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Whitespace" style="text-decoration:none" target="_blank">Whitespace - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+   	  	   
+	
+     		  	 	
+	
+     		 		  
+	
+     		 		  
+	
+     		 				
+	
+     	 		  
+	
+     	     
+	
+     			 			
+	
+     		 				
+	
+     			  	 
+	
+     		 		  
+	
+     		  	  
+	
+     	    	
+	
+     	 	 
+	
+  
+
+
+
+</pre>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="090">
+  <div class="page-header">
+    <h1>090	WindowsScriptHostのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+        <h6>
+        <a HREF="http://ja.wikipedia.org/wiki/Windows_Script_Host" style="text-decoration:none" target="_blank">WindowsScriptHost - Wikipedia</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<pre class="brush: csharp;">
+以下の内容を拡張子が.wsfのファイルに保存しWindows Script Hostを使って実行する。Windows Based Script Hostを用いればGUIで実行することも可能である。
+</pre>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="091">
+  <div class="page-header">
+    <h1>091	x86CPU,Linux,NASMのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+; "Hello World" for Linux on Intel 80x86 using nasm (Intel syntax).
+; Enter this into "hello.asm" then type:
+; "nasm -f elf hello.asm"
+; "ld hello.o -o hello"
+; "./hello"
+
+section .data ;data section declaration
+msg db 'Hello World!',0AH
+len equ $-msg ;string length
+
+section .text ;code section declaration
+global _start ;entry point (start of execution)
+_start: mov edx,len ;string length
+ mov ecx,msg ;string start
+ mov ebx,1 ;file handle: stdout
+ mov eax,4 ;sys_write
+ int 80h ;kernel system call
+ 
+ mov ebx,0 ;return value
+ mov eax,1 ;sys_exit
+ int 80h ;kernel system call
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="092">
+  <div class="page-header">
+    <h1>092	x86CPU,MS-DOS,NASMのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+; hello_world.asm
+ bits 16
+ org 100h
+
+ mov ah, 09
+ mov dx, message
+ int 21h
+
+ mov ax, 4C00h
+ int 21h
+
+message db 'Hello, world!$'
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<br><br><br><br>
+
+     <!-- Footer ================================================== -->
+      <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+
+    <!-- Le javascript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

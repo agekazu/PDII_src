@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>解説ページ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+	 <script type="text/javascript">
+
+	   var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-23019901-1']);
+		  _gaq.push(['_setDomainName', "bootswatch.com"]);
+  		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+
+	   (function() {
+	     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	   })();
+	 </script>
+
+
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<link type="text/css" rel="stylesheet" href="styles/shCore.css" />
+	<link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css" />
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCSharp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCss.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDelphi.js"></script>
+	<script type="text/javascript" src="scripts/shBrushDiff.js"></script>
+	<script type="text/javascript" src="scripts/shBrushGroovy.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJava.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPlain.js"></script>
+	<script type="text/javascript" src="scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="scripts/shBrushRuby.js"></script>
+	<script type="text/javascript" src="scripts/shBrushScala.js"></script>
+	<script type="text/javascript" src="scripts/shBrushSql.js"></script>
+	<script type="text/javascript" src="scripts/shBrushVb.js"></script>
+	<script type="text/javascript" src="scripts/shBrushXml.js"></script>
+	<script type="text/javascript">
+    SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+    SyntaxHighlighter.all();
+	</script>
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="50">
+
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+		<a class="brand" href="sample1.html"><H1>解説ページ</H1></a>
+		<div class="nav-collapse" id="main-menu">
+		<ul class="nav">
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">解説一覧<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="questions1.html">解説ページ1</a></li>
+                <li><a href="questions2.html">解説ページ2</a></li>
+                <li><a href="questions3.html">解説ページ3</a></li>
+                <li><a href="questions4.html">解説ページ4</a></li>
+                <li><a href="questions5.html">解説ページ5</a></li>
+                <li><a href="questions6.html">解説ページ6</a></li>
+                <li><a href="questions7.html">解説ページ7</a></li>
+                <li><a href="questions8.html">解説ページ8</a></li>
+                <li><a href="questions9.html">解説ページ9</a></li>
+                <li><a href="questions10.html">解説ページ10</a></li>
+              </ul>
+            </li>
+            <li class="divider-vertical"></li>
+          <li><a href="javascript:history.back();">戻る</a></li>
+          <li class="divider-vertical"></li>
+          <li><a href="javascript:history.forward();">進む</a></li>
+          </ul>
+          </ul>
+		</div><!-- /.nav-collapse -->
+     </div>
+   </div><!-- /navbar-inner -->
+ </div><!-- /navbar -->
+
+    <div class="container">
+
+<header class="jumbotron subhead" id="overview">
+<br><br><br><br>
+  <h1>解説</h1>
+  <p class="lead">このページはソースコードの解説ページです。</p>
+  <div class="subnav">
+    <ul class="nav nav-pills">
+      <li><a href="#091">091	: x86CPU,Linux,NASMのHelloWorld</a></li>
+      <li><a href="#092">092	: x86CPU,MS-DOS,NASMのHelloWorld</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================================================== -->
+<section id="091">
+  <div class="page-header">
+    <h1>091	x86CPU,Linux,NASMのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+コマンドラインにHelloWorldを出力する。<br><br>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+; "Hello World" for Linux on Intel 80x86 using nasm (Intel syntax).
+; Enter this into "hello.asm" then type:
+; "nasm -f elf hello.asm"
+; "ld hello.o -o hello"
+; "./hello"
+
+section .data ;data section declaration
+msg db 'Hello World!',0AH
+len equ $-msg ;string length
+
+section .text ;code section declaration
+global _start ;entry point (start of execution)
+_start: mov edx,len ;string length
+ mov ecx,msg ;string start
+ mov ebx,1 ;file handle: stdout
+ mov eax,4 ;sys_write
+ int 80h ;kernel system call
+ 
+ mov ebx,0 ;return value
+ mov eax,1 ;sys_exit
+ int 80h ;kernel system call
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================================================== -->
+<section id="092">
+  <div class="page-header">
+    <h1>092	x86CPU,MS-DOS,NASMのHelloWorld</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+      	コマンドラインにHelloWorldを出力する。<br><br>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:cpp" type="syntaxhighlighter"><![CDATA[
+; hello_world.asm
+ bits 16
+ org 100h
+
+ mov ah, 09
+ mov dx, message
+ int 21h
+
+ mov ax, 4C00h
+ int 21h
+
+message db 'Hello, world!$'
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<br><br><br><br>
+
+      <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+      </footer>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -227,7 +227,6 @@ function practiceProgressUpdata(game,scene,percentage){
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
-      //TODO
       game.sounds["finishSound"].play();
       var date = new Date();
       //プレイ時間を求める
@@ -252,22 +251,7 @@ function practiceProgressUpdata(game,scene,percentage){
     scene.bar.volume = 0;
     scene.bar.increment = 0;
     scene.myPercentage = 0;
-    //scene.playerBars[id].increment += 10;
-    //    scene.members.forEach(function(id){
-    //      if(this.scene.myId != id){
-    //        this.scene.playerBars[id].increment = 0;
-    //        this.scene.playerBars[id].volume = 0;
-    //      }
-    //    },this);
-    //    scene.membersScore[id][0]++;
-    //    scene.members.forEach(function(id){
-    //      if(this.scene.membersScore[id]){
-    //        this.scene.membersScore[id][2] += this.scene.membersScore[id][1];
-    //        this.scene.membersScore[id][1] = 0;
-    //      }
-    //    },this);
-    //  }else{
-}
+  }
 }
 
 
@@ -331,7 +315,6 @@ function practiceWhatKey(text,game){
     repaint(game.scene,game);
 
   }else{
-    //TODO
     //不正解の時
     //console.log("違います");
     game.scene.missCount += 1

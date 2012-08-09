@@ -311,8 +311,6 @@ function progressUpdata(game,scene,id,percentage) {
     },this);
   }else{
     if(scene.myId != id){
-      console.log(id);
-      console.log(scene.playerBars);
       scene.playerBars[id].increment += 10;
     }
   }

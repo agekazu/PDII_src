@@ -1,0 +1,3 @@
+68	Prolog_HelloWorld
+ goal :-
+   write('hello, world!\n').

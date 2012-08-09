@@ -1,0 +1,9 @@
+60	MSIL_HelloWorld
+.assembly helloworld{}
+.method public static void hoge() cil managed
+{
+	.entrypoint
+	ldstr      "Hello, World"
+	call       void [mscorlib]System.Console::WriteLine(string)
+	ret
+}

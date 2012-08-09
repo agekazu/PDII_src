@@ -34,7 +34,7 @@ function init(){
   var roomList = {} // 生成された部屋が格納される連想配列
   , standbyQueue = new Array() // 待機中のユーザを格納 
     , nextKey = 0 // 次のゲームのkey
-    , MAXMEMBERS = 2 // ゲーム開始時の人数
+    , MAXMEMBERS = 4 // ゲーム開始時の人数
     , MAXQUESTIONS = 5; // 出題数
   // connectionイベント
   io.sockets.on('connection', function(socket){

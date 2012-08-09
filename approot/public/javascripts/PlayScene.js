@@ -14,11 +14,15 @@ function PlayScene(game,context,name){
     /*----Session----*/
     var socket = io.connect(location.href, {"force new connection":true});
     this.socket = socket;
+    this.gameStartFlag = false;
 
     socket.on('connect', function(){
-      //getStandbyイベント発火
-      socket.emit('getStandby');
+      if(!this.gameStartFlag){
+        //getStandbyイベント発火
+        socket.emit('getStandby');
+      }
       socket.on('getRoomKey', function(data){
+        this.gameStartFlag = true;
         createRoom(data);
       });
     });

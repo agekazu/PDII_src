@@ -14,11 +14,15 @@ function PracticeScene(game,context,name){
     /*----Session----*/
     var socket = io.connect(location.href, {"force new connection":true});
     this.socket = socket;
+    this.gameStartFlag = false;
 
     socket.on('connect', function(){
-      //getStandbyイベント発火
-      socket.emit('getPracticeQuestions');
+      if(!this.gameStartFlag){
+        //getStandbyイベント発火
+        socket.emit('getPracticeQuestions');
+      }
       socket.on('getQuestion', function(questions){
+        this.gameStartFlag = true;
         gameStart(scene,questions)
       });
     });

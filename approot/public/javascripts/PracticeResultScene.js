@@ -73,7 +73,7 @@ function PracticeResultButton(scene,name,layer,imgObj,x,y,width,height){
             case "postTwitterButton":
               window.open("https://twitter.com/intent/tweet?text=あなたの成績は、"
                   +this.scene.rankingCharacter[0]+" "+this.scene.rankingCharacter[1]
-                  +" "+this.scene.rankingCharacter[2]+"でした！"+location.href+"#Souda_PD2", _blank);
+                  +" "+this.scene.rankingCharacter[2]+"でした！"+location.href+" #Souda_PD2", _blank);
               break;
           }
         }

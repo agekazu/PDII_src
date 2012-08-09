@@ -34,9 +34,12 @@ function PracticeScene(game,context,name){
       this.scene.questionNumber = 0;
       this.scene.myPercentage = 0;
       this.scene.nowQuestion = this.scene.questions[0][1];
-      console.log(this.scene.questions);
-      console.log(this.scene.questions[0][1]);
+      this.scene.nowQuestionInfo = this.scene.questions[0][0];
       this.scene.tabCount = 0;
+      this.scene.questionNumberList = [];
+      this.scene.questions.forEach(function(question){
+        this.scene.questionNumberList.push(question[0][0]);
+      },this);
 
       /*----カウントダウンParts生成----*/
       this.scene.completedTextList = new Array();
@@ -51,6 +54,24 @@ function PracticeScene(game,context,name){
   }
 }
 
+
+function PracticeQuestionInfoCharacter(scene,name,text,font,color,layer,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.x = x;
+  this.y = y;
+  this.font = font;
+  this.color = color;
+  this.text = text;
+
+  //loop関数を上書き
+  this.loop = function(){
+    this.context.fillStyle = this.color;
+    this.context.font = this.font;
+    this.context.fillText(this.text,this.x,this.y);
+    this.context.rect(20,50,680,450);
+    this.context.stroke();
+  }
+}
 
 function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
@@ -122,16 +143,25 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
         this.scene.score = 0;
         this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
+        //TODO
+        var date = new Date();
+        //現在のミリ秒取得
+        this.scene.time = date.getTime();
+        this.scene.correctCount = 0;
+        this.scene.missCount= 0;
+
         var mypracticeProgressBar = new practiceProgressBar(this.scene,"mypracticeProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = mypracticeProgressBar;
         progressBarCounter = 0;
         var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
         this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
-
+        this.scene.questionInfoCharacter = new PracticeQuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,20,20,100,100);
         this.scene.addParts(mypracticeProgressBar);
+        this.scene.addParts(this.scene.questionInfoCharacter);
         this.scene.addParts(questionCharacter);
         this.scene.addParts(this.scene.practiceComplatedCharacter);
+
         //画面遷移音
         this.game.sounds["changeSound"].play();
       }
@@ -197,10 +227,13 @@ function practiceProgressUpdata(game,scene,percentage){
     game.scene.questionNumber++;
     //ゲームが終了した場合
     if(game.scene.questionNumber >= game.scene.questions.length){ 
-      //終了音
+      //TODO
       game.sounds["finishSound"].play();
+      var date = new Date();
+      //プレイ時間を求める
+      game.scene.time = date.getTime() - game.scene.time;
       game.scene.questionNumber = 0;
-      game.resultData = {};
+      game.resultData = {"time":game.scene.time,"correct":game.scene.correctCount,"miss":game.scene.missCount,"questionNumberList":game.scene.questionNumberList};
       console.log("PracticeResult画面へ遷移");
       game.changeScene('practiceResultScene');
     }else{
@@ -212,6 +245,8 @@ function practiceProgressUpdata(game,scene,percentage){
       game.scene.textList = game.scene.textList.replace(/ /g,'␣');
       game.scene.textList = game.scene.textList.split('\n');
       game.scene.bar.emitCounter = game.scene.nowQuestion.length/10;
+      game.scene.nowQuestionInfo = game.scene.questions[game.scene.questionNumber][0];
+      game.scene.questionInfoCharacter.text = game.scene.nowQuestionInfo[0]+" "+game.scene.nowQuestionInfo[1];
       repaint(game.scene,game);
     }
     scene.bar.volume = 0;
@@ -274,7 +309,7 @@ function practiceWhatKey(text,game){
     //console.log("問題文の長さ/10(小数点以下切り捨て)="+Math.floor(game.scene.textLength/10));
     //console.log("入力済み文字列の長さ="+__charCounter__);
     //console.log("入力済み文字列 % 問題文の長さ/10="+__charCounter__ % Math.floor(game.scene.textLength/10));
-
+    game.scene.correctCount += 1;
     __charCounter__++;
     // 10％打ったら
     if(__charCounter__ >= game.scene.bar.emitCounter){
@@ -296,8 +331,10 @@ function practiceWhatKey(text,game){
     repaint(game.scene,game);
 
   }else{
+    //TODO
     //不正解の時
     //console.log("違います");
+    game.scene.missCount += 1
   }
 }
 

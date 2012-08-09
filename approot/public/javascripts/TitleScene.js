@@ -19,8 +19,8 @@ function TitleScene(game,context,name){
     var titleLogo = new StartTitle(this,"startTitleLogo",0,game.resouces["titleLogo"],(cw/2) - th,0,th,th);
     var practiceImg = new StartButton(this,"practiceButton",1,game.resouces["practice"],
         cw/2 + bw/2, ch/2 - bh, bw, bh);
-    var rankingImg = new StartButton(this, "rankingButton",1,game.resouces["ranking"], 
-        cw/2 + bw/2, ch/2 + bh, bw, bh);
+//    var rankingImg = new StartButton(this, "rankingButton",1,game.resouces["ranking"], 
+//        cw/2 + bw/2, ch/2 + bh, bw, bh);
     var oppositionImg =  new StartButton(this, "oppositionButton",1,game.resouces["opposition"], 
         cw/2 - bw * 2, ch/2 - bh, bw, bh);
     var questionsImg =  new StartButton(this, "questionsButton",1,game.resouces["questions"], 
@@ -28,7 +28,7 @@ function TitleScene(game,context,name){
 
     this.addParts(titleLogo);
     this.addParts(oppositionImg);
-    this.addParts(rankingImg);
+//    this.addParts(rankingImg);
     this.addParts(practiceImg);
     this.addParts(questionsImg);
   }
@@ -64,6 +64,10 @@ function TitleScene(game,context,name){
               case "practiceButton":
                 console.log("Practice画面へ遷移");
                 this.game.changeScene("practiceScene");
+                break;
+              case "questionsButton":
+                console.log("questions画面へ遷移");
+                window.open(location.href+"questions/", "_blank");
                 break;
             } 
           }

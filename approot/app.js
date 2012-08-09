@@ -130,8 +130,14 @@ function init(){
 
 // httpサーバを立てる
 // ルートディレクトリにアクセスがあったら、index.htmlへ
-app.get('/', function(req, res) {
+app.get('/', function(req, res){
   res.sendfile(__dirname + '/views/index.html');
 });
+// 解説ページにアクセスがあったら、questions.htmlへ
+app.get('/questions/', function(req, res){
+  console.log(req.query.number);
+  res.sendfile(__dirname + '/views/questions.html');
+});
+
 
 

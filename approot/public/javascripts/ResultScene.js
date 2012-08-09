@@ -13,8 +13,7 @@ function ResultScene(game,context,name){
     //ボタンの描画
     var toStartButton = new ResultButton(this,"toStartButton",1,game.resouces["toStart"],
         cw/4 - bw/2 , ch-200, bw, bh); 
-    var postTwitterButton = new ResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],
-        cw/2 - bw/2, ch-200, bw, bh); 
+    var postTwitterButton = new ResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],cw/2 - bw/2, ch-200, bw, bh); 
 
     //タイトルの描画
     var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
@@ -22,11 +21,9 @@ function ResultScene(game,context,name){
 
     //スコアを計算する
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
-
     this.rank = [];
     this.myScore = 0;
     //resltDataに格納されたキーmembersを回す
-    console.log(this.game.resultData);
     this.members = this.game.resultData["members"];
     this.members.forEach(function(id){
       var score;
@@ -93,7 +90,8 @@ function ResultButton(scene,name,layer,imgObj,x,y,width,height){
               this.game.changeScene("titleScene");
               break;
             case "postTwitterButton":
-              window.open("https://twitter.com/intent/tweet?text=あなたの順位は"+this.scene.members.length+"人中"
+              window.open("https://twitter.com/intent/tweet?text=あなたの順位は"
+                  +this.scene.members.length+"人中"
                   +this.scene.myRank+"位で、スコアは"+this.scene.myScore
                   +"点でした! "+location.href, "_blank");
               break;

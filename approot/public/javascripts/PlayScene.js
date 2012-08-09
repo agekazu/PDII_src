@@ -58,6 +58,11 @@ function PlayScene(game,context,name){
       this.scene.nowQuestion = this.scene.questions[0][1];
       this.scene.nowQuestionInfo = this.scene.questions[0][0];
       this.scene.tabCount = 0;
+      this.scene.questionNumberList = [];
+      this.scene.questions.forEach(function(question){
+        this.scene.questionNumberList.push(question[0][0]);
+      },this);
+
 
       /*----カウントダウンParts生成----*/
       this.scene.completedTextList = new Array();
@@ -272,7 +277,7 @@ function progressUpdata(game,scene,id,percentage) {
     if(game.scene.questionNumber >= game.scene.questions.length){ 
       //終了音
       game.sounds["finishSound"].play();
-      game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId};
+      game.resultData = {"score":game.scene.membersScore,"members":game.scene.members,"myId":game.scene.myId,"questionNumberList":game.scene.questionNumberList};
       console.log("Result画面へ遷移");
       game.changeScene('resultScene');
       scene.socket.disconnect();

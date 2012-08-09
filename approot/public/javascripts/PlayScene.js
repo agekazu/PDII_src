@@ -345,7 +345,7 @@ function whatKey(text,game){
     return;
   }
   //console.log("出題文字のキーコード "+a_char.charCodeAt(0));
-  //console.log("入力されたキーコード "+event.keyCode);
+  console.log("入力されたキーコード "+event.keyCode);
 
   if(keyHash[event.keyCode][0] == a_char || keyHash[event.keyCode][1] == a_char || keyHash[event.keyCode][2] == a_char){
     // 正解の時

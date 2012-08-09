@@ -1,0 +1,2 @@
+90	WindowsScriptHost_HelloWorld
+以下の内容を拡張子が.wsfのファイルに保存しWindows Script Hostを使って実行する。Windows Based Script Hostを用いればGUIで実行することも可能である。

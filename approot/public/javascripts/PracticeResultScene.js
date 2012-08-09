@@ -18,8 +18,6 @@ function PracticeResultScene(game,context,name){
     var resultTitleCharacter = new PracticeResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial","#000000",1,cw/2-40,50,100,20);
     
-    console.log(this.game.resultData["questionNumberList"]);
-    console.log(this.game.resultData);
 
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
 

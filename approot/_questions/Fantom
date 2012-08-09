@@ -1,0 +1,7 @@
+29	Fantom_HelloWorld
+class Hello
+  {
+  static Void main() { echo("Hello, World!") }
+  }
+
+

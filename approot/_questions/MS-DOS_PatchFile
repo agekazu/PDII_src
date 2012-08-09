@@ -1,3 +1,0 @@
-59	MS-DOS_PatchFile_HelloWorld
-@ECHO OFF
-ECHO Hello, world!

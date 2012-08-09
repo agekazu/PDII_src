@@ -119,7 +119,7 @@ function WaitingCharacter(scene,name,text,font,color,layer,x,y,width,height){
   }
 }
 
-function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+function PlayCharacter(scene,name,textList,point,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
@@ -130,6 +130,7 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.tmp = this.tmp.replace(/\t/g,'»---');
   this.tmp = this.tmp.replace(/ /g,'␣');
   this.scene.textList = this.tmp.split('\n');
+  this.scene.point = point;
 
   //loop関数を上書き
   this.loop = function(){
@@ -137,14 +138,14 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
     //配列textListをy座標+35しながら一つずつの要素を描画
     this.scene.textList.forEach(function(text){
       this.context.fillStyle = this.color;
-      this.context.font = this.font;
+      this.context.font = this.scene.point+"pt " + this.font;
       this.context.fillText(text,this.x,this.tmpY);
       this.tmpY += 35;
     },this);
   }
 }
 
-function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+function CompletedCharacter(scene,name,textList,point,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
@@ -152,13 +153,14 @@ function CompletedCharacter(scene,name,textList,font,color,layer,x,y,width,heigh
   this.font = font;
   this.color = color;
   this.textList = textList;
+  this.scene.point = point;
   //loop関数を上書き
   this.loop = function(){
     this.tmpY=this.y;
     //配列textListをy座標+35しながら一つずつの要素を描画
     this.textList.forEach(function(text){
       this.context.fillStyle = this.color;
-      this.context.font = this.font;
+      this.context.font = this.scene.point+"pt " + this.font;
       this.context.fillText(text,this.x,this.tmpY);
       this.tmpY += 35;
     },this);
@@ -190,6 +192,10 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.score = 0;
         this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
+        var ch = this.game.canvas.height;
+        var cw = this.game.canvas.width;
+        
+
         var myProgressBar = new ProgressBar(this.scene,"myProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = myProgressBar;
         this.scene.playerBars = [];
@@ -202,20 +208,49 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
             this.scene.addParts(playerProgressBar);
           }
         },this);
-        var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
+        var questionCharacter = new PlayCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],30,"monospace","#999999",0,30,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
-        this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
+        this.scene.completedCharacter = new CompletedCharacter(this.scene,"CompletedCharacter",this.scene.completedTextList,30,"monospace","#000000",1,30,100,100,100);
         this.scene.questionInfoCharacter = new QuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,20,20,100,100);
+        var characterSizePlusButton = new CharacterSizeConvButton(this.scene, "characterSizePlusButton",1,this.game.resouces["csPlus"],cw-225, ch-170, 150, 50);
+        var characterSizeMinusButton = new CharacterSizeConvButton(this.scene, "characterSizeMinusButton",1,this.game.resouces["csMinus"],cw-225, ch-110, 150, 50);
 
         this.scene.addParts(myProgressBar);
         this.scene.addParts(questionCharacter);
         this.scene.addParts(this.scene.questionInfoCharacter);
         this.scene.addParts(this.scene.completedCharacter);
+        this.scene.addParts(characterSizePlusButton);
+        this.scene.addParts(characterSizeMinusButton);
         //画面遷移音
         this.game.sounds["changeSound"].play();
       }
     }  
     count--;
+  }
+}
+
+function CharacterSizeConvButton(scene,name,layer,imgObj,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.loop = function(){
+    //GUI部品の画像の描画
+    this.imgObj = imgObj;
+    this.context.drawImage(this.imgObj,this.x,this.y);
+  }
+  //clickされた座標を取得、ボタンの範囲内かを調べる
+  this.onclick = function(e){
+    var mouseX = this.game.mouseX;
+    var mouseY = this.game.mouseY;
+    if(mouseX >= this.x && mouseX <= this.x + this.width
+        && mouseY >= this.y && mouseY <= this.y + this.height){
+          switch(name){
+            case "characterSizeMinusButton": 
+              this.scene.point -= 1;
+              break;
+            case "characterSizePlusButton":
+              this.scene.point += 1;
+              break;
+          } 
+        }
   }
 }
 

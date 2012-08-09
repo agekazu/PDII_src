@@ -1,5 +1,0 @@
-63	Pascal_HelloWorld
-program Hello(output);
-begin
- writeln('Hello, world!')
-end.

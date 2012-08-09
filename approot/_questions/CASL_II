@@ -1,8 +1,0 @@
-17	CASLII_HelloWorld
-;Output "Hello, World!" program
-MAIN     START
-         OUT    BUF,LEN
-         RET
-BUF      DC     'Hello, World!'
-LEN      DC     13
-         END

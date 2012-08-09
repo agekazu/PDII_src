@@ -1,5 +1,0 @@
-67	PowerPCCPU,MacOS,Fantasm_HelloWorld
-        lwz r3,hello(rtoc)
-        Xcall DrawString
-        blr
-hello: pstring "Hello, world!"

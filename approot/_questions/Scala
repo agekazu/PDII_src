@@ -1,4 +1,0 @@
-74	Scala_HelloWorld
- object HelloWorld extends Application {
-   println("Hello, world!")
- }

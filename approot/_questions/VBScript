@@ -1,9 +1,0 @@
-87	VBScript_HelloWorld
-<?xml version="1.0"?>
-<job>
-  <script language="VBScript">
-    <![CDATA[
-      WScript.Echo("Hello, World!")
-    ]]>
-  </script>
-</job>

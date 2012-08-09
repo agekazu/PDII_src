@@ -77,7 +77,7 @@ function PracticeQuestionInfoCharacter(scene,name,text,font,color,layer,x,y,widt
   }
 }
 
-function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+function practiceCharacter(scene,name,textList,point,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
@@ -87,7 +87,9 @@ function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height
   this.tmp = textList.replace(/\n/g,'↵\n');
   this.tmp = this.tmp.replace(/\t/g,'»---');
   this.tmp = this.tmp.replace(/ /g,'␣');
+  this.scene.point = point;
   this.scene.textList = this.tmp.split('\n');
+  console.log(this.scene);
 
   //loop関数を上書き
   this.loop = function(){
@@ -95,14 +97,14 @@ function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height
     //配列textListをy座標+35しながら一つずつの要素を描画
     this.scene.textList.forEach(function(text){
       this.context.fillStyle = this.color;
-      this.context.font = this.font;
+      this.context.font = this.scene.point+"pt "+this.font;
       this.context.fillText(text,this.x,this.tmpY);
       this.tmpY += 35;
     },this);
   }
 }
 
-function practiceCompletedCharacter(scene,name,textList,font,color,layer,x,y,width,height){
+function practiceCompletedCharacter(scene,name,textList,point,font,color,layer,x,y,width,height){
   this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
   this.x = x;
   this.y = y;
@@ -110,13 +112,15 @@ function practiceCompletedCharacter(scene,name,textList,font,color,layer,x,y,wid
   this.font = font;
   this.color = color;
   this.textList = textList;
+  this.scene.point = point;
+  console.log(this);
   //loop関数を上書き
   this.loop = function(){
     this.tmpY=this.y;
     //配列textListをy座標+35しながら一つずつの要素を描画
     this.textList.forEach(function(text){
       this.context.fillStyle = this.color;
-      this.context.font = this.font;
+      this.context.font = this.scene.point+"pt "+this.font;
       this.context.fillText(text,this.x,this.tmpY);
       this.tmpY += 35;
     },this);
@@ -147,24 +151,30 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
         this.scene.score = 0;
         this.scene.winnerCount = 0;
         this.scene.keyDownFlag = true;
-        //TODO
         var date = new Date();
-        //現在のミリ秒取得
         this.scene.time = date.getTime();
         this.scene.correctCount = 0;
         this.scene.missCount= 0;
+        var ch = this.game.canvas.height;
+        var cw = this.game.canvas.width;
+
 
         var mypracticeProgressBar = new practiceProgressBar(this.scene,"mypracticeProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = mypracticeProgressBar;
         progressBarCounter = 0;
-        var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"20pt monospace","#999999",2,30,100,100,100);
+        var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],20,"monospace","#999999",2,30,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
-        this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"20pt monospace","#000000",2,30,100,100,100);
+        this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,20,"monospace","#000000",2,30,100,100,100);
         this.scene.questionInfoCharacter = new PracticeQuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,30,35,100,100);
+
+        var characterSizePlusButton = new PracticeCharacterSizeConvButton(this.scene, "characterSizePlusButton",1,this.game.resouces["csPlus"],cw-225, ch-170, 150, 50);
+        var characterSizeMinusButton = new PracticeCharacterSizeConvButton(this.scene, "characterSizeMinusButton",1,this.game.resouces["csMinus"],cw-225, ch-110, 150, 50);
         this.scene.addParts(mypracticeProgressBar);
         this.scene.addParts(this.scene.questionInfoCharacter);
         this.scene.addParts(questionCharacter);
         this.scene.addParts(this.scene.practiceComplatedCharacter);
+        this.scene.addParts(characterSizePlusButton);
+        this.scene.addParts(characterSizeMinusButton);
 
         //画面遷移音
         this.game.sounds["changeSound"].play();
@@ -172,6 +182,31 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
     }else{  
       count--;
     }
+  }
+}
+
+function PracticeCharacterSizeConvButton(scene,name,layer,imgObj,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.loop = function(){
+    //GUI部品の画像の描画
+    this.imgObj = imgObj;
+    this.context.drawImage(this.imgObj,this.x,this.y);
+  }
+  //clickされた座標を取得、ボタンの範囲内かを調べる
+  this.onclick = function(e){
+    var mouseX = this.game.mouseX;
+    var mouseY = this.game.mouseY;
+    if(mouseX >= this.x && mouseX <= this.x + this.width
+        && mouseY >= this.y && mouseY <= this.y + this.height){
+          switch(name){
+            case "characterSizeMinusButton": 
+              this.scene.point -= 1;
+              break;
+            case "characterSizePlusButton":
+              this.scene.point += 1;
+              break;
+          } 
+        }
   }
 }
 

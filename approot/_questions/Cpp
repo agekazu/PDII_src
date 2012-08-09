@@ -1,8 +1,0 @@
-23	C++_HelloWorld
-#include <iostream>
-
-int main()
-{
-	std::cout << "Hello World!_n";
-	return 0;
-}

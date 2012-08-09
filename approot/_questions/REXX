@@ -1,4 +1,0 @@
-72	REXX_HelloWorld
- /* A comment line at topmost of the script is not a part of program,
- but telling the shell that this is a REXX program, not a batch. */
- say "Hello, world!"

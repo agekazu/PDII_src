@@ -1,2 +1,0 @@
-57	Mops_HelloWorld
- : hello ( -- ) ." Hello Forth-World!" cr ;

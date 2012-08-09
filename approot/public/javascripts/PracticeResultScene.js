@@ -33,8 +33,7 @@ function PracticeResultScene(game,context,name){
     var correct = this.game.resultData.correct;
     var miss = this.game.resultData.miss;
     
-    //msをh,m,sに変換
-    var s = String(time * 1000);
+    var s = String(time / 1000);
 
     //表示する文字列
     this.rankingCharacter = ["時間:"+s+"秒","正タイプ率:"+((correct/(correct+miss))*100).toFixed(2)+"％","一秒あたり:"+(correct/(time/1000)).toFixed(2)+"key/s"];

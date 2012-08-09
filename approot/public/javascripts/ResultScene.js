@@ -101,7 +101,7 @@ function ResultButton(scene,name,layer,imgObj,x,y,width,height){
               window.open("https://twitter.com/intent/tweet?text=あなたの順位は"
                   +this.scene.members.length+"人中"
                   +this.scene.myRank+"位で、スコアは"+this.scene.myScore
-                  +"点でした! "+location.href, "_blank");
+                  +"点でした! "+location.href+"#Souda_PD2", "_blank");
               break;
           }
         }
@@ -121,7 +121,7 @@ function QuestionDocumentButton(scene,name,layer,number,count,x,y,width,height){
     var mouseY = this.game.mouseY;
     if(mouseX >= this.x && mouseX <= this.x + this.width
         && mouseY >= this.y && mouseY <= this.y+this.height){
-          window.open(location.href+"questions/?number="+number, "_blank");
+          window.open(location.href+"questions/?number="+number+"#"+("00"+number).slice(-3), "_blank");
         }
   } 
 }

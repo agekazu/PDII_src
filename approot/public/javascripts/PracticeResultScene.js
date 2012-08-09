@@ -73,7 +73,7 @@ function PracticeResultButton(scene,name,layer,imgObj,x,y,width,height){
             case "postTwitterButton":
               window.open("https://twitter.com/intent/tweet?text=あなたの成績は、"
                   +this.scene.rankingCharacter[0]+" "+this.scene.rankingCharacter[1]
-                  +" "+this.scene.rankingCharacter[2]+"でした！"+location.href, "_blank");
+                  +" "+this.scene.rankingCharacter[2]+"でした！"+location.href+"#Souda_PD2", _blank");
               break;
           }
         }
@@ -93,7 +93,7 @@ function PracticeQuestionDocumentButton(scene,name,layer,number,count,x,y,width,
     var mouseY = this.game.mouseY;
     if(mouseX >= this.x && mouseX <= this.x + this.width
         && mouseY >= this.y && mouseY <= this.y+this.height){
-          window.open(location.href+"questions/?number="+number, "_blank");
+          window.open(location.href+"questions/?number="+number+"#"+("00"+number).slice(-3), "_blank");
         }
   } 
 }

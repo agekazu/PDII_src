@@ -12,18 +12,19 @@ function ResultScene(game,context,name){
     var cw = this.game.canvas.width;
     //ボタンの描画
     var toStartButton = new ResultButton(this,"toStartButton",1,game.resouces["toStart"],
-        cw/4 - bw/2 , ch-200, bw, bh); 
-    var postTwitterButton = new ResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],cw/2 - bw/2, ch-200, bw, bh); 
+        224, ch-230, bw, bh); 
+    var postTwitterButton = new ResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],577, ch-230, bw, bh);
 
     //タイトルの描画
     var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial","#000000",1,cw/2-40,50,100,20);
     
+    //解説ボタンの描画
     var i = 0;
     this.game.resultData["questionNumberList"].forEach(function(questionNumber){
-      var questionDocumentButton = new QuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,0+i*200,525,200,75);
-      i++;
+      var questionDocumentButton = new PracticeQuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,24+(i*200),510,100,50);
       this.addParts(questionDocumentButton);
+      i++;
     },this);
       
       

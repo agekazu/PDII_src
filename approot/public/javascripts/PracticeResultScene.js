@@ -10,18 +10,17 @@ function PracticeResultScene(game,context,name){
     var cw = this.game.canvas.width;
     //ボタンの描画
     var toStartButton = new PracticeResultButton(this,"toStartButton",1,game.resouces["toStart"],
-        cw/4 - bw/2 , ch-200, bw, bh); 
-    var postTwitterButton = new PracticeResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],
-        cw/2 - bw/2, ch-200, bw, bh); 
+        224, ch-230, bw, bh); 
+    var postTwitterButton = new PracticeResultButton(this,"postTwitterButton",1,game.resouces["postTwitter"],577, ch-230, bw, bh); 
 
     //タイトルの描画
     var resultTitleCharacter = new PracticeResultCharacter(this,"resultTilteText","結果発表",
-        "30pt Arial","#000000",1,cw/2-40,50,100,20);
+        "30pt Arial","#000000",1,cw/2-100,50,100,20);
 
     var i = 0;
     //解説ボタンの描画
     this.game.resultData["questionNumberList"].forEach(function(questionNumber){
-      var questionDocumentButton = new PracticeQuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,0+i*200,525,200,75);
+      var questionDocumentButton = new PracticeQuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,24+(i*200),510,100,50);
       i++;
       this.addParts(questionDocumentButton);
     },this);
@@ -41,7 +40,7 @@ function PracticeResultScene(game,context,name){
     var i = 1;
     this.rankingCharacter.forEach(function(rc){
       var rankingCharacter = new PracticeResultCharacter(this,"rankingCharacter",
-        rc,"25pt Arial","#ff0000",1,cw/2-250,90*i+45,200,25);
+        rc,"25pt Arial","#ff0000",1,cw/2-180,90*i+20,200,25);
       this.addParts(rankingCharacter);
       i++;
     },this);

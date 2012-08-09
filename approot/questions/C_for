@@ -1,0 +1,11 @@
+94	C_for
+#include<stdio.h>
+
+int main(){
+	int i;
+	for(i=0;5>i;i++){
+		printf("%d\t",i);
+	}
+	puts("");
+	return 0;
+}

@@ -64,23 +64,23 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-		<a class="brand" href="sample1.html"><H1>解説ページ</H1></a>
+		<a class="brand" href="questionsSummary.html"><H1>解説ページ</H1></a>
 		<div class="nav-collapse" id="main-menu">
 		<ul class="nav">
           <ul class="nav pull-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">解説一覧<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="questions1.html">解説ページ1</a></li>
-                <li><a href="questions2.html">解説ページ2</a></li>
-                <li><a href="questions3.html">解説ページ3</a></li>
-                <li><a href="questions4.html">解説ページ4</a></li>
-                <li><a href="questions5.html">解説ページ5</a></li>
-                <li><a href="questions6.html">解説ページ6</a></li>
-                <li><a href="questions7.html">解説ページ7</a></li>
-                <li><a href="questions8.html">解説ページ8</a></li>
-                <li><a href="questions9.html">解説ページ9</a></li>
-                <li><a href="questions10.html">解説ページ10</a></li>
+                <li><a href="questions1.html">問題001~010</a></li>
+                <li><a href="questions2.html">問題011~020</a></li>
+                <li><a href="questions3.html">問題021~030</a></li>
+                <li><a href="questions4.html">問題031~040</a></li>
+                <li><a href="questions5.html">問題041~050</a></li>
+                <li><a href="questions6.html">問題051~060</a></li>
+                <li><a href="questions7.html">問題061~070</a></li>
+                <li><a href="questions8.html">問題071~080</a></li>
+                <li><a href="questions9.html">問題081~090</a></li>
+                <li><a href="questions10.html">問題091~096</a></li>
               </ul>
             </li>
             <li class="divider-vertical"></li>
@@ -104,6 +104,14 @@
     <ul class="nav nav-pills">
       <li><a href="#091">091	: x86CPU,Linux,NASMのHelloWorld</a></li>
       <li><a href="#092">092	: x86CPU,MS-DOS,NASMのHelloWorld</a></li>
+      <li><a href="#093">093	: Cのwhile</a></li>
+      <li><a href="#094">094	: Cのfor</a></li>
+      <li><a href="#095">095	: Javaのwhile</a></li>
+    </ul>
+  </div>
+  <div class="subnav">
+    <ul class="nav nav-pills">
+      <li><a href="#096">096	: Javaのfor</a></li>
     </ul>
   </div>
 </header>
@@ -191,6 +199,157 @@ message db 'Hello, world!$'
   </div>
 
 </section>
+
+<!-- ================================================== -->
+<section id="093">
+  <div class="page-header">
+    <h1>093	Cのwhile</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+while文で0から4まで繰り返す。<br><br>
+      	<h6>
+        <a HREF="http://www.geocities.jp/ky_webid/ProgrammingPlacePlus/c/014.html" style="text-decoration:none" target="_blank">C言語編　第14章　同じ処理を繰り返す（while文）</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+#include<stdio.h>
+
+int main(){
+	int i = 0;
+	while(5>i){
+		printf("%d\t",i);
+		i++;
+	}
+	puts("");
+	return 0;
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="094">
+  <div class="page-header">
+    <h1>094	Cのfor</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+for文で0から4まで繰り返す。<br><br>
+      	<h6>
+        <a HREF="http://www.geocities.jp/ky_webid/ProgrammingPlacePlus/c/015.html" style="text-decoration:none" target="_blank">C言語編　第15章　同じ処理を繰り返す（for文）</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:c" type="syntaxhighlighter"><![CDATA[
+#include<stdio.h>
+
+int main(){
+	int i;
+	for(i=0;5>i;i++){
+		printf("%d\t",i);
+	}
+	puts("");
+	return 0;
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="095">
+  <div class="page-header">
+    <h1>095	Javaのwhile</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+while文で0から4まで繰り返す。<br><br>
+      	<h6>
+        <a HREF="http://www.javaroad.jp/java_control1.htm" style="text-decoration:none" target="_blank">Javaの道：制御文（1．while、do while、for）</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:java" type="syntaxhighlighter"><![CDATA[
+class Java_while {
+	public static void main(String[] args) {
+		int i = 0;
+		while(i<5) {
+			System.out.println(i);
+			i++;
+		}
+	}
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================================================== -->
+<section id="096">
+  <div class="page-header">
+    <h1>096	Javaのfor</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="span5">
+      <div class="well">
+      	<strong>解説</strong><br><br>
+for文で0から4まで繰り返す。<br><br>
+      	<h6>
+        <a HREF="http://www.javaroad.jp/java_control1.htm" style="text-decoration:none" target="_blank">Javaの道：制御文（1．while、do while、for）</a></br>
+        </h6>
+      </div>
+    </div>
+
+    <div class="span7">
+      <h3>ソースコード</h3>
+<script class="brush:java" type="syntaxhighlighter"><![CDATA[
+class Java_for {
+	public static void main(String[] args) {
+		int i;
+		for(i=0;i<5;i++) {
+			System.out.println(i);
+		}
+	}
+}
+]]></script>
+    </div>
+
+  </div>
+
+</section>
+
 
 <br><br><br><br>
 

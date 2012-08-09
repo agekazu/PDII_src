@@ -1,4 +1,4 @@
 26	Dart_HelloWorld
- main() {
+main() {
    print('Hello, Dart!');
- }
+}

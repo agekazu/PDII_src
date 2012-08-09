@@ -1,2 +1,2 @@
 2	ABAP_HelloWorld
- WRITE / 'Hello, world!'.
+WRITE / 'Hello, world!'.

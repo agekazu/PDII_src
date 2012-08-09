@@ -1,2 +1,2 @@
 34	Haskell_HelloWorld
- main = interact $ const "Hello,World!\n"
+main = interact $ const "Hello,World!\n"

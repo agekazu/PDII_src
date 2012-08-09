@@ -17,8 +17,16 @@ function PracticeResultScene(game,context,name){
     //タイトルの描画
     var resultTitleCharacter = new PracticeResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial","#000000",1,cw/2-40,50,100,20);
-    
 
+    var i = 0;
+    //解説ボタンの描画
+    this.game.resultData["questionNumberList"].forEach(function(questionNumber){
+      var questionDocumentButton = new PracticeQuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,0+i*200,525,200,75);
+      i++;
+      this.addParts(questionDocumentButton);
+    },this);
+    
+    
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
 
     var time = this.game.resultData.time;
@@ -26,9 +34,7 @@ function PracticeResultScene(game,context,name){
     var miss = this.game.resultData.miss;
     
     //msをh,m,sに変換
-    var h = String(Math.floor(time / 3600000) + 100).substring(1);
-    var m = String(Math.floor((time - h * 3600000)/60000)+ 100).substring(1);
-    var s = String(Math.round((time - h * 3600000 - m * 60000)/1000)+ 100).substring(1);
+    var s = String(time * 1000);
 
     //表示する文字列
     this.rankingCharacter = ["時間:"+s+"秒","正タイプ率:"+((correct/(correct+miss))*100).toFixed(2)+"％","一秒あたり:"+(correct/(time/1000)).toFixed(2)+"key/s"];
@@ -71,6 +77,24 @@ function PracticeResultButton(scene,name,layer,imgObj,x,y,width,height){
                   +" "+this.scene.rankingCharacter[2]+"でした！"+location.href, "_blank");
               break;
           }
+        }
+  } 
+}
+
+function PracticeQuestionDocumentButton(scene,name,layer,number,count,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.scene = scene;
+  this.imgObj = this.game.resouces["questionDocumentImg"+count];
+  this.loop = function(){
+    this.context.drawImage(this.imgObj,this.x,this.y);
+  } 
+  this.onclick = function(e){
+                
+    var mouseX = this.game.mouseX;
+    var mouseY = this.game.mouseY;
+    if(mouseX >= this.x && mouseX <= this.x + this.width
+        && mouseY >= this.y && mouseY <= this.y+this.height){
+          window.open(location.href+"questions/?number="+number, "_blank");
         }
   } 
 }

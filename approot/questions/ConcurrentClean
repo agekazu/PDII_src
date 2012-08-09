@@ -1,3 +1,3 @@
 22	ConcurrentClean_HelloWorld
- module HelloWorld
- Start = "Hello, world!"
+module HelloWorld
+Start = "Hello, world!"

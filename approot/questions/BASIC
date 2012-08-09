@@ -1,2 +1,2 @@
 9	BASIC_HelloWorld
- print "Hello, world!"
+print "Hello, world!"

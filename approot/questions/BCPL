@@ -1,7 +1,7 @@
 10	BCPL_HelloWorld
- GET "LIBHDR"
+GET "LIBHDR"
  
- LET START () BE
- $(
+LET START () BE
+$(
  WRITES ("Hello, world!*N")
- $)
+$)

@@ -1,2 +1,2 @@
 30	Forth_HelloWorld
- .( Hello, world!) CR
+.( Hello, world!) CR

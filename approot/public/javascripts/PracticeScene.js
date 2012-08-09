@@ -80,7 +80,7 @@ function practiceCharacter(scene,name,textList,font,color,layer,x,y,width,height
   this.tmpY = y;
   this.font = font;
   this.color = color;
-  this.tmp = textList.replace(/\n/g,'↲\n');
+  this.tmp = textList.replace(/\n/g,'↵\n');
   this.tmp = this.tmp.replace(/\t/g,'»---');
   this.tmp = this.tmp.replace(/ /g,'␣');
   this.scene.textList = this.tmp.split('\n');
@@ -153,10 +153,10 @@ function practiceCountDownCharacter(scene,name,font,color,layer,x,y,width,height
         var mypracticeProgressBar = new practiceProgressBar(this.scene,"mypracticeProgressBar",1,20,500,680,50,this.scene.myId);
         this.scene.bar = mypracticeProgressBar;
         progressBarCounter = 0;
-        var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"30pt monospace","#7d7d7d",0,20,100,100,100);
+        var questionCharacter = new practiceCharacter(this.scene,"QuestionCharacter",this.scene.questions[0][1],"20pt monospace","#999999",2,30,100,100,100);
         this.scene.bar.emitCounter = this.scene.questions[0][1].length / 10;
-        this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"30pt monospace","#000000",1,20,100,100,100);
-        this.scene.questionInfoCharacter = new PracticeQuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,20,20,100,100);
+        this.scene.practiceComplatedCharacter = new practiceCompletedCharacter(this.scene,"practiceCompletedCharacter",this.scene.completedTextList,"20pt monospace","#000000",2,30,100,100,100);
+        this.scene.questionInfoCharacter = new PracticeQuestionInfoCharacter(this.scene,"questionInfoCharacter",this.scene.nowQuestionInfo[0]+" "+this.scene.nowQuestionInfo[1],"17pt monospace","#000000",1,30,35,100,100);
         this.scene.addParts(mypracticeProgressBar);
         this.scene.addParts(this.scene.questionInfoCharacter);
         this.scene.addParts(questionCharacter);
@@ -239,7 +239,7 @@ function practiceProgressUpdata(game,scene,percentage){
       //問題遷移音
       game.sounds["changeSound"].play();
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
-      game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
+      game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↵\n');
       game.scene.textList = game.scene.textList.replace(/\t/g,'»---');
       game.scene.textList = game.scene.textList.replace(/ /g,'␣');
       game.scene.textList = game.scene.textList.split('\n');
@@ -270,6 +270,7 @@ function practiceWhatKey(text,game){
   var a_char = this.text.charAt(__charCounter__);
   //console.log("出題文字=> " + a_char);
   //console.log("入力された文字=> " + String.fromCharCode(event.keyCode));
+  //console.log("入力された文字=> " + event.keyCode);
 
   // keyHashの選択
   var keyHash;

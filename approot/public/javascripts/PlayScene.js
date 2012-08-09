@@ -36,7 +36,6 @@ function PlayScene(game,context,name){
           progressUpdata(game,scene,data["id"],data["percentage"]);
         });
         room.on('addMember',function(data){
-          console.log(data);
           scene.membersLength = data[0]+1;
           scene.maxMembers = data[1];
         });
@@ -123,7 +122,7 @@ function PlayCharacter(scene,name,textList,font,color,layer,x,y,width,height){
   this.tmpY = y;
   this.font = font;
   this.color = color;
-  this.tmp = textList.replace(/\n/g,'↲\n');
+  this.tmp = textList.replace(/\n/g,'↵\n');
   this.tmp = this.tmp.replace(/\t/g,'»---');
   this.tmp = this.tmp.replace(/ /g,'␣');
   this.scene.textList = this.tmp.split('\n');
@@ -191,8 +190,6 @@ function CountDownCharacter(scene,name,font,color,layer,x,y,width,height){
         this.scene.bar = myProgressBar;
         this.scene.playerBars = [];
         progressBarCounter = 0;
-        console.log(this.scene.members);
-        console.log(this.scene.myId);
         this.scene.members.forEach(function(id){
           if (this.scene.myId != id){
             var playerProgressBar = new ProgressBar(this.scene,"PlayerProgressBar",1,750,50+(progressBarCounter*50+5),200,25,id);
@@ -285,7 +282,7 @@ function progressUpdata(game,scene,id,percentage) {
       //問題遷移音
       game.sounds["changeSound"].play();
       game.scene.nowQuestion = game.scene.questions[game.scene.questionNumber][1];
-      game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↲\n');
+      game.scene.textList = game.scene.nowQuestion.replace(/\n/g,'↵\n');
       game.scene.textList = game.scene.textList.replace(/\t/g,'»---');
       game.scene.textList = game.scene.textList.replace(/ /g,'␣');
       game.scene.textList = game.scene.textList.split('\n');
@@ -345,7 +342,7 @@ function whatKey(text,game){
     return;
   }
   //console.log("出題文字のキーコード "+a_char.charCodeAt(0));
-  console.log("入力されたキーコード "+event.keyCode);
+  //console.log("入力されたキーコード "+event.keyCode);
 
   if(keyHash[event.keyCode][0] == a_char || keyHash[event.keyCode][1] == a_char || keyHash[event.keyCode][2] == a_char){
     // 正解の時

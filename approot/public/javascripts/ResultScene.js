@@ -18,7 +18,15 @@ function ResultScene(game,context,name){
     //タイトルの描画
     var resultCharacter = new ResultCharacter(this,"resultTilteText","結果発表",
         "30pt Arial","#000000",1,cw/2-40,50,100,20);
-
+    
+    var i = 0;
+    this.game.resultData["questionNumberList"].forEach(function(questionNumber){
+      var questionDocumentButton = new QuestionDocumentButton(this,"questionDocumentButton",1,questionNumber,i+1,0+i*200,525,200,75);
+      i++;
+      this.addParts(questionDocumentButton);
+    },this);
+      
+      
     //スコアを計算する
     //game.resultData("score":membersScore[id](0:勝ち数,1:使わない,2:進捗の合計),"members":idの配列,"myId":自分のid) 
     this.rank = [];
@@ -96,6 +104,24 @@ function ResultButton(scene,name,layer,imgObj,x,y,width,height){
                   +"点でした! "+location.href, "_blank");
               break;
           }
+        }
+  } 
+}
+
+function QuestionDocumentButton(scene,name,layer,number,count,x,y,width,height){
+  this.__proto__ = new Parts(scene,name,layer,x,y,width,height);
+  this.scene = scene;
+  this.imgObj = this.game.resouces["questionDocumentImg"+count];
+  this.loop = function(){
+    this.context.drawImage(this.imgObj,this.x,this.y);
+  } 
+  this.onclick = function(e){
+                
+    var mouseX = this.game.mouseX;
+    var mouseY = this.game.mouseY;
+    if(mouseX >= this.x && mouseX <= this.x + this.width
+        && mouseY >= this.y && mouseY <= this.y+this.height){
+          window.open(location.href+"questions/?number="+number, "_blank");
         }
   } 
 }

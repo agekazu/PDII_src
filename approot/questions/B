@@ -1,4 +1,4 @@
 8	B_HelloWorld
- main( ) {
+main( ) {
  putchar('Hello, world!*n');
- }
+}

@@ -1,6 +1,6 @@
 96	Java_for
-class Java_for {
-	public static void main(String[] args) {
+class Java_for{
+	public static void main(String[] args){
 		int i;
 		for(i=0;i<5;i++) {
 			System.out.println(i);

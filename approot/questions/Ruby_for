@@ -1,0 +1,5 @@
+100	Ruby_for
+i = 0
+for i in 0..4
+	puts i
+end

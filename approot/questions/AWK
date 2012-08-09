@@ -1,2 +1,2 @@
 7	AWK_HelloWorld
-BEGIN { print "Hello, world!" }
+BEGIN {print "Hello, world!"}

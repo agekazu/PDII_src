@@ -3,5 +3,5 @@ GET "LIBHDR"
  
 LET START () BE
 $(
- WRITES ("Hello, world!*N")
+	WRITES ("Hello, world!*N")
 $)

@@ -144,7 +144,7 @@ app.get('/questions/', function(req, res){
   if(!req.query.number){
     res.sendfile(__dirname + '/views/questions0.html');
   }else{
-    var pageNumber = Math.floor(req.query.number/10 + 1);
+    var pageNumber = Math.floor((parseInt(req.query.number)-1)/10+1);
     res.sendfile(__dirname + '/views/questions'+pageNumber+'.html');
   }
 });

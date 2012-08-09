@@ -1,5 +1,5 @@
 51	Mana_HelloWorld
 action HelloWorldActor::init
 {
- print("Hello, world!\n");
+	print("Hello, world!\n");
 }

@@ -2,13 +2,13 @@
 class HELLO_WORLD
 
 creation
- make
+	make
 feature
- make is
- local
- io:BASIC_IO
- do
- !!io
- io.put_string("%N Hello, world!")
- end -- make
+	make is
+	local
+	io:BASIC_IO
+	do
+	!!io
+	io.put_string("%N Hello, world!")
+	end -- make
 end -- class HELLO_WORLD

@@ -1,9 +1,2 @@
 65	PerlScript_HelloWorld
-<?xml version="1.0"?>
-<job>
-  <script language="PerlScript">
-    <![CDATA[
-      &WScript->Echo("Hello, World!");
-    ]]>
-  </script>
-</job>
+&WScript->Echo("Hello, World!");

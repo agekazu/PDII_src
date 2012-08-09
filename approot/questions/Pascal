@@ -1,5 +1,5 @@
 63	Pascal_HelloWorld
 program Hello(output);
 begin
- writeln('Hello, world!')
+	writeln('Hello, world!')
 end.

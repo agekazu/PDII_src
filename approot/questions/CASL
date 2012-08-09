@@ -1,6 +1,6 @@
 16	CASL_HelloWorld
-    OUT TEXT,LEN
+	OUT TEXT,LEN
 
-LEN  DC  12
-TEXT DC  'HELLO
-          world!'
+LEN		DC	12
+TEXT	DC	'HELLO
+			world!'

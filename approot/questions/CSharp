@@ -1,8 +1,8 @@
 24	C#_HelloWorld
-class HelloWorldApp 
+class HelloWorldApp
 {
- static void Main() 
- {
-  System.Console.WriteLine("Hello, world!");
- }
+	static void Main()
+	{
+		System.Console.WriteLine("Hello, world!");
+	}
 }

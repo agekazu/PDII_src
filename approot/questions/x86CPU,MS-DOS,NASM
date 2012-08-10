@@ -1,0 +1,13 @@
+92	x86CPU,MS-DOS,NASM_HelloWorld
+; hello_world.asm
+ bits 16
+ org 100h
+
+ mov ah, 09
+ mov dx, message
+ int 21h
+
+ mov ax, 4C00h
+ int 21h
+
+message db 'Hello, world!$'

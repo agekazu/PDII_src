@@ -18,13 +18,13 @@ function TitleScene(game,context,name){
 
     var titleLogo = new StartTitle(this,"startTitleLogo",0,game.resouces["titleLogo"],(cw/2) - th,0,th,th);
     var practiceImg = new StartButton(this,"practiceButton",1,game.resouces["practice"],
-        cw/2 + bw/2, ch/2 - bh, bw, bh);
+        150, ch/2 + bh-10, bw, bh);
 //    var rankingImg = new StartButton(this, "rankingButton",1,game.resouces["ranking"], 
 //        cw/2 + bw/2, ch/2 + bh, bw, bh);
     var oppositionImg =  new StartButton(this, "oppositionButton",1,game.resouces["opposition"], 
-        cw/2 - bw * 2, ch/2 - bh, bw, bh);
+        cw/2-100, ch/2 + bh-10, bw, bh);
     var questionsImg =  new StartButton(this, "questionsButton",1,game.resouces["questions"], 
-        cw/2 - bw * 2, ch/2 + bh, bw, bh);
+        cw/2+150, ch/2 + bh-10, bw, bh);
 
     this.addParts(titleLogo);
     this.addParts(oppositionImg);

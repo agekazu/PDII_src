@@ -1,5 +1,0 @@
-51	Mana_HelloWorld
-action HelloWorldActor::init
-{
-	print("Hello, world!\n");
-}

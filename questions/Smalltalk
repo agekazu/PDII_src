@@ -1,2 +1,0 @@
-78	Smalltalk_HelloWorld
-Transcript show: 'Hello, world!'

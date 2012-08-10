@@ -1,4 +1,0 @@
-38	Icon_HelloWorld
-procedure main (args)
-write ("Hello, World!")
-end

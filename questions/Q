@@ -1,3 +1,0 @@
-71	Q_HelloWorld
-hello = writes "Hello, world!\n";
-hello;

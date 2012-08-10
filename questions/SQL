@@ -1,3 +1,0 @@
-80	SQL_HelloWorld
-select 'hello world' from dual;
-select 'hello world';

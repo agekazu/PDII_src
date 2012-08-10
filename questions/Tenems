@@ -1,7 +1,0 @@
-84	Tenems_HelloWorld
-<hello> extends object{
-<Main> static public routine int (){
-Console.WriteLine("Hello, world!");
-return 0;
-}
-}

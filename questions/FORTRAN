@@ -1,9 +1,0 @@
-31	FORTRAN_HelloWorld
-		WRITE(*,10)
-	10 FORMAT('Hello, World!')
-		STOP
-		END
-
-program main
-	print *,"Hello, World!"
-end program main

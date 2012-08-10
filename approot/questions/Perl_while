@@ -1,7 +1,7 @@
 101	Perl_while
 $i = 0;
 while ($i < 5) {
-    print "$i_t";
+    print "$i\t";
     $i++;
 }
-print "_n";
+print "\n";

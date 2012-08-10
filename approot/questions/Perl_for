@@ -1,5 +1,5 @@
 102	Perl_for
 for($i = 0; $i < 5; $i++){
-print "$i _t" ;
+print "$i \t" ;
 }
-print "_n";
+print "\n";

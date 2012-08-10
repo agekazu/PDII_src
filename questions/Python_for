@@ -1,0 +1,5 @@
+98	Python_for
+i = 0
+for plus in range(5):
+	print i
+	i+=1

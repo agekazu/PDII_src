@@ -1,0 +1,7 @@
+5	ALGOL60_HelloWorld
+'''procedure''' hello (channel);
+	'''value''' channel;
+	'''integer''' channel;
+	'''begin'''
+	outstring (channel, 'Hello, world!')
+	'''end''' hello;

@@ -1,0 +1,2 @@
+42	JScript_HelloWorld
+WScript.Echo("Hello, World!");

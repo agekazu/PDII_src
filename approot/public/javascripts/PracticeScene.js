@@ -99,7 +99,7 @@ function practiceCharacter(scene,name,textList,point,font,color,layer,x,y,width,
       this.context.fillStyle = this.color;
       this.context.font = this.scene.point+"pt "+this.font;
       this.context.fillText(text,this.x,this.tmpY);
-      this.tmpY += 35;
+      this.tmpY += this.scene.point + 5;
     },this);
   }
 }
@@ -122,7 +122,7 @@ function practiceCompletedCharacter(scene,name,textList,point,font,color,layer,x
       this.context.fillStyle = this.color;
       this.context.font = this.scene.point+"pt "+this.font;
       this.context.fillText(text,this.x,this.tmpY);
-      this.tmpY += 35;
+      this.tmpY += this.scene.point + 5;
     },this);
   }
 }

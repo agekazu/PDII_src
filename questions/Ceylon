@@ -1,0 +1,4 @@
+18	Ceylon_HelloWorld
+void hello(){
+	writeLine("Hello World!");
+}

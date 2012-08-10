@@ -1,0 +1,6 @@
+88	VisualBasic.NET_HelloWorld
+Public Class HelloWorldApp
+	Shared Sub Main()
+		System.Console.WriteLine("Hello, World!")
+	End Sub
+End Class

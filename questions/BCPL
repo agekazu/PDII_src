@@ -1,0 +1,7 @@
+10	BCPL_HelloWorld
+GET "LIBHDR"
+ 
+LET START () BE
+$(
+	WRITES ("Hello, world!*N")
+$)

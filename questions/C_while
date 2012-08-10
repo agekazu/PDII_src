@@ -1,0 +1,12 @@
+93	C_while
+#include<stdio.h>
+
+int main(){
+	int i = 0;
+	while(5>i){
+		printf("%d\t",i);
+		i++;
+	}
+	puts("");
+	return 0;
+}

@@ -1,0 +1,8 @@
+48	LSL_HelloWorld
+default
+{
+	state_entry()
+	{
+		llSay(0,"Hello, World!");
+	}
+}
